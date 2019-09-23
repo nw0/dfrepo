@@ -1,0 +1,17 @@
+[user]
+	email = nsim@posteo.net
+	name = Nicholas Sim
+	signingkey = 9EDB95B59C51F28E
+[merge "ours"]
+	driver = true
+[core]
+	pager = less -+$LESS -R
+	excludesfile = /home/nicholas/.gitignore_global
+[pager]
+	branch = false
+[color]
+    ui = auto
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
