@@ -1,0 +1,9 @@
+# Based on Nicola Paolucci's article
+# https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
+
+git clone --bare https://github.com/nw0/dfrepo.git $HOME/.dfrepo
+git --git-dir=$HOME/.dfrepo --work-tree=$HOME checkout
+
+# restart zsh
+
+dfgit config --local status.showUntrackedFiles no
