@@ -1,3 +1,6 @@
+# zshrc
+# Run by interactive shells only
+
 source ~/.config/zsh/completion.zsh
 source ~/.config/zsh/setopt.zsh
 source ~/.config/zsh/constants.zsh
@@ -11,7 +14,6 @@ setopt correct
 autoload -Uz colors
 colors
 
-GIT_PROMPT_EXECUTABLE="python"
 source ~/.config/zsh/zsh-git-prompt/zshrc.sh
 source ~/.config/zsh/nw0.zsh-theme
 

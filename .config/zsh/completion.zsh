@@ -10,20 +10,23 @@ zstyle ':completion:*' matcher-list ''
 zstyle ':completion:*' original true
 zstyle ':completion:*' preserve-prefix '//[^/]##/'
 zstyle ':completion:*' squeeze-slashes true
-zstyle :compinstall filename '/home/nicholas/.zshrc'
+zstyle :compinstall filename '$ZDOTDIR/.zshrc'
 
 autoload -Uz compinit
-compinit
+ZCOMPDUMP_DIR=$HOME/.cache/zsh
+ZCOMPDUMP_FILE=$ZCOMPDUMP_DIR/zcompdump
+if [ ! -d $ZCOMPDUMP_DIR ]; then
+    mkdir -p $ZCOMPDUMP_DIR
+fi
+compinit -d $ZCOMPDUMP_FILE
 # End of lines added by compinstall
 
 autoload -U history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
-bindkey "^[[A" history-beginning-search-backward-end
-bindkey "^[[B" history-beginning-search-forward-end
-bindkey "^[[3~" delete-char
-bindkey "^[3;5~" delete-char
-bindkey "${terminfo[khome]}" beginning-of-line
-bindkey "${terminfo[kend]}" end-of-line
+
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
 
 setopt HIST_IGNORE_DUPS
