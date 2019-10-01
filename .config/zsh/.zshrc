@@ -7,6 +7,7 @@ source ~/.config/zsh/auto-ls-gs.zsh
 
 precmd () { print -Pn "\e]2;%n@%M | %~\a"; }
 
+setopt correct
 autoload -Uz colors
 colors
 
