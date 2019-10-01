@@ -6,7 +6,6 @@
 	driver = true
 [core]
 	pager = less -+$LESS -R
-	excludesfile = /home/nicholas/.gitignore_global
 [pager]
 	branch = false
 [color]
