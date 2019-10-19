@@ -1,3 +1,7 @@
+[user]
+	email = nsim@posteo.net
+	name = Nicholas Sim
+	signingkey = 9EDB95B59C51F28E
 [merge "ours"]
 	driver = true
 [core]
