@@ -4,18 +4,23 @@
 /backup/
 /BrowserHomes/
 /cheri/
+/Mail/
 /personal/
+/scratch/
 /work/
 
 # ignored as irrelevant
 /.cache/
 /.cargo/
 /.dfrepo/
+/.gnupg/
 /.lesshst
 /.local/share/
+/.mailcheckrc
 /.pki/
 /.pulse-cookie
 /.rustup/
+/.ssh/
 /.steam/
 /.steampath
 /.steampid
