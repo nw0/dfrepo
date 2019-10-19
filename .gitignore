@@ -1,4 +1,25 @@
 # ignore file for dotfiles repo
+
+# my working directories
+/backup/
+/BrowserHomes/
+/cheri/
+/personal/
+/work/
+
+# ignored as irrelevant
 /.cache/
+/.cargo/
 /.dfrepo/
-.histfile
+/.lesshst
+/.local/share/
+/.pki/
+/.pulse-cookie
+/.rustup/
+/.steam/
+/.steampath
+/.steampid
+/.vim/
+/.viminfo
+/.vscode-oss/
+/.wget-hsts
