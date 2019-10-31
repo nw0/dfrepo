@@ -6,6 +6,7 @@
 /cheri/
 /Mail/
 /personal/
+/repos/
 /scratch/
 /work/
 
@@ -13,10 +14,12 @@
 /.cache/
 /.cargo/
 /.dfrepo/
+/.ghidra/
 /.gnupg/
 /.lesshst
 /.local/share/
 /.mailcheckrc
+/.password-store/
 /.pki/
 /.pulse-cookie
 /.rustup/
