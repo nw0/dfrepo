@@ -2,4 +2,5 @@
 .*.swp
 .vscode/
 .idea/
+*.iml
 *.txss
