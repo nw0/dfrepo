@@ -1,0 +1,4 @@
+#!/usr/bin/sh
+__FIREFOX_HOME=$HOME/BrowserHomes/general
+[ ! -d "$__FIREFOX_HOME" ] && mkdir -p $__FIREFOX_HOME
+firejail --private=$__FIREFOX_HOME firefox $@

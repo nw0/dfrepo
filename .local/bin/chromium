@@ -1,0 +1,4 @@
+#!/usr/bin/sh
+__CHROMIUM_HOME=$HOME/BrowserHomes/general-chromium
+[ ! -d "$__CHROMIUM_HOME" ] && mkdir -p $__CHROMIUM_HOME
+firejail --private=$__CHROMIUM_HOME chromium $@
