@@ -4,7 +4,10 @@
 #
 # Read `man 5 sway` for a complete reference.
 
-input * xkb_layout "dvorak"
+input * {
+    xkb_layout "dvorak"
+    xkb_options ctrl:nocaps
+}
 
 ### Variables
 #
@@ -199,6 +202,8 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+for_window [window_role="About"] floating enable
+
 #
 # Status Bar:
 #
@@ -217,6 +222,8 @@ bar {
 default_border pixel 2
 hide_edge_borders smart
 workspace_auto_back_and_forth yes
+
+font pango:Source Sans 9
 
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym XF86MonBrightnessUp exec brightnessctl set +5%
