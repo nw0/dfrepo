@@ -1,5 +1,12 @@
 ;; User interface settings
 
+
+;; Theme: this won't load properly if it's before custom-safe-themes
+(use-package gruvbox-theme
+  :ensure t
+  :config
+  (load-theme 'gruvbox))
+
 ;; Line numbering
 (when (>= emacs-major-version 26)
   (setq display-line-numbers-type 'relative)
@@ -47,9 +54,11 @@
 (show-paren-mode t)                 ; highlight matching parentheses
 (setq show-paren-delay 0.0
       blink-matching-paren nil)
+(electric-pair-mode 1)              ; auto-insert closing parens, and more
 
 (setq-default tab-width 4
-              indent-tabs-mode nil)
+              indent-tabs-mode nil
+              show-trailing-whitespace t)
 (setq require-final-newline t)      ; less insanity
 (add-hook 'before-save-hook 'whitespace-cleanup)    ; no more trailing ws
 
@@ -74,11 +83,25 @@
   (setq which-key-idle-delay 0.5))
 
 
-;; Theme: this won't load properly if it's before custom-safe-themes
-(use-package gruvbox-theme
+;; git
+(use-package magit
+  :ensure t)
+
+;; show diffs in gutter
+(use-package diff-hl
   :ensure t
+  :init
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
   :config
-  (load-theme 'gruvbox))
+  (global-diff-hl-mode 1)
+  (diff-hl-flydiff-mode 1))
+
+;; amazing completion
+(use-package company
+  :ensure t
+  :diminish 'company-mode
+  :init
+  (add-hook 'after-init-hook 'global-company-mode))
 
 ;; for graphical emacs
 (set-face-attribute 'default nil :height 140)
