@@ -9,6 +9,7 @@
 (load-file "~/.emacs.d/interface.el")
 (load-file "~/.emacs.d/edit.el")
 (load-file "~/.emacs.d/evil.el")
+(load-file "~/.emacs.d/modes.el")
 
 ;; less frequent garbage collection
 (setq gc-cons-threshold (* 100 1024 1024)) ;; 100 mb
