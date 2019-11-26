@@ -86,5 +86,9 @@
   :init
   (add-hook 'after-init-hook 'global-company-mode))
 
+(use-package mixed-pitch
+  :ensure t
+  :hook  (text-mode . mixed-pitch-mode))
+
 ;; for graphical emacs
 (set-face-attribute 'default nil :height 140)

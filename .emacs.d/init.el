@@ -5,10 +5,10 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
+(load-file "~/.emacs.d/org.el")
 (load-file "~/.emacs.d/interface.el")
 (load-file "~/.emacs.d/edit.el")
 (load-file "~/.emacs.d/evil.el")
-(load-file "~/.emacs.d/org.el")
 
 ;; less frequent garbage collection
 (setq gc-cons-threshold (* 100 1024 1024)) ;; 100 mb
@@ -17,3 +17,5 @@
       ;; jit-lock-stealth-load 200
       jit-lock-chunk-size 1000
       jit-lock-defer-time 0.05)
+;; this helps org-bullets (and other unicode things?) load faster
+(setq inhibit-compacting-font-caches t)

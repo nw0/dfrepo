@@ -15,3 +15,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+ '(fixed-pitch ((t (:family "Fira Mono"))))
+ '(variable-pitch ((t (:family "Nimbus Sans")))))
