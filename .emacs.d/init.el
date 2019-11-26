@@ -6,6 +6,7 @@
 (load custom-file)
 
 (load-file "~/.emacs.d/interface.el")
+(load-file "~/.emacs.d/edit.el")
 (load-file "~/.emacs.d/evil.el")
 (load-file "~/.emacs.d/org.el")
 

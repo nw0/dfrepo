@@ -12,15 +12,6 @@
   (setq display-line-numbers-type 'relative)
   (global-display-line-numbers-mode))
 
-;; use utf-8
-(prefer-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(setq coding-system-for-read 'utf-8
-      coding-system-for-write 'utf-8)
-(setq default-buffer-file-coding-system 'utf-8)
-
 ;; adapted from https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 (setq delete-old-versions -1            ; delete excess backup versions silently
       version-control t                 ; use version control
@@ -47,20 +38,12 @@
 (line-number-mode 1)                ; default, but be sure
 (column-number-mode 1)              ; in the modeline
 (blink-cursor-mode -1)              ; this is annoying (graphical only)
-(global-prettify-symbols-mode t)    ; nice lambda symbols
 (global-font-lock-mode t)           ; syntax highlighting
 (global-hl-line-mode t)
 
 (show-paren-mode t)                 ; highlight matching parentheses
 (setq show-paren-delay 0.0
       blink-matching-paren nil)
-(electric-pair-mode 1)              ; auto-insert closing parens, and more
-
-(setq-default tab-width 4
-              indent-tabs-mode nil
-              show-trailing-whitespace t)
-(setq require-final-newline t)      ; less insanity
-(add-hook 'before-save-hook 'whitespace-cleanup)    ; no more trailing ws
 
 
 ;; ahh
