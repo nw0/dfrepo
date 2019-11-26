@@ -86,6 +86,12 @@
   :init
   (add-hook 'after-init-hook 'global-company-mode))
 
+;; show spaces between latin/cjk characters
+(use-package pangu-spacing
+  :ensure t
+  :config
+  (global-pangu-spacing-mode 1))
+
 (use-package mixed-pitch
   :ensure t
   :hook  (text-mode . mixed-pitch-mode))
