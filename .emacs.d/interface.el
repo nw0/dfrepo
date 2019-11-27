@@ -79,13 +79,6 @@
   (global-diff-hl-mode 1)
   (diff-hl-flydiff-mode 1))
 
-;; amazing completion
-(use-package company
-  :ensure t
-  :diminish 'company-mode
-  :init
-  (add-hook 'after-init-hook 'global-company-mode))
-
 ;; show spaces between latin/cjk characters
 (use-package pangu-spacing
   :ensure t

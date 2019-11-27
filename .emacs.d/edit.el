@@ -16,6 +16,13 @@
 (setq require-final-newline t)      ; less insanity
 (add-hook 'before-save-hook 'whitespace-cleanup)    ; no more trailing ws
 
+;; amazing completion
+(use-package company
+  :ensure t
+  :diminish company-mode
+  :hook (after-init . global-company-mode)
+  )
+
 (use-package smart-hungry-delete
   :ensure t
   :bind (("<backspace>" . smart-hungry-delete-backward-char)
