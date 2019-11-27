@@ -22,6 +22,7 @@
   :config
   (add-to-list 'company-backends 'company-anaconda))
 
+;; markdown
 (use-package markdown-mode
   :ensure t
   :commands (markdown-mode gfm-mode)
@@ -29,6 +30,12 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
+
+;; yaml
+(use-package yaml-mode
+  :ensure t
+  :hook
+  (yaml-mode . (lambda () (mixed-pitch-mode -1))))
 
 ;; ledger
 (use-package ledger-mode
