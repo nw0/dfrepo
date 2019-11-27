@@ -1,3 +1,14 @@
+(use-package anaconda-mode
+  :ensure t
+  :diminish
+  :hook (python-mode . anaconda-mode))
+
+(use-package company-anaconda
+  :ensure t
+  :after (company anaconda-mode)
+  :config
+  (add-to-list 'company-backends 'company-anaconda))
+
 (use-package markdown-mode
   :ensure t
   :commands (markdown-mode gfm-mode)

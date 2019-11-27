@@ -82,6 +82,7 @@
 ;; show spaces between latin/cjk characters
 (use-package pangu-spacing
   :ensure t
+  :diminish
   :config
   (global-pangu-spacing-mode 1))
 
