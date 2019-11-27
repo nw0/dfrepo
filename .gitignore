@@ -5,6 +5,7 @@
 /BrowserHomes/
 /cheri/
 /Mail/
+/org/
 /personal/
 /repos/
 /scratch/
@@ -13,7 +14,12 @@
 # ignored as irrelevant
 /.cache/
 /.cargo/
+/.config/systemd/user/*.target.wants/
 /.dfrepo/
+/.emacs.d/auto-save-list
+/.emacs.d/bookmarks
+/.emacs.d/elpa/
+/.emacs.d/transient/
 /.ghidra/
 /.gnupg/
 /.lesshst
@@ -31,3 +37,5 @@
 /.viminfo
 /.vscode-oss/
 /.wget-hsts
+/.xsession-errors
+/.xsession-errors.old
