@@ -11,6 +11,7 @@
 (electric-pair-mode 1)              ; auto-insert closing parens, and more
 
 (setq-default tab-width 4
+              tab-stop-list '(4 8 12)
               indent-tabs-mode nil
               show-trailing-whitespace t)
 (setq require-final-newline t)      ; less insanity
