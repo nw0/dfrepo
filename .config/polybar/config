@@ -54,19 +54,37 @@ primary = ${colors.blue4}
 secondary = ${colors.blue12}
 alert = ${colors.orange208}
 
-[bar/mainbar]
+[bar/window]
+width = 100%
+height = 18
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 2
+line-color = ${colors.foreground}
+border-size = 0
+
+font-0 = Adobe Source Sans Pro:size=8;2
+font-1 = Material Design Icons;3
+
+modules-left = i3
+modules-right = xwindow
+
+[bar/status]
 ; monitor = ${env:MONITOR:DP2}
 width = 100%
 height = 20
 offset-x = 0
 offset-y = 0
+bottom = true
 fixed-center = false
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 3
-line-color = #f00
+line-size = 2
+line-color = ${colors.foreground}
 
 border-size = 0
 border-color = #00000000
@@ -80,8 +98,8 @@ module-margin-right = 2
 font-0 = Adobe Source Sans Pro:size=9;2
 font-1 = Material Design Icons;3
 
-modules-left = i3
-modules-center = xwindow
+modules-left =
+modules-center =
 modules-right = filesystem xbacklight pulseaudio memory cpu wlan eth battery temperature date
 
 tray-position = right
@@ -92,7 +110,10 @@ cursor-scroll = ns-resize
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:30:...%
+label = %title:0:50:...%
+format-padding = 2
+label-empty = no title
+label-empty-foreground = ${colors.fg4}
 
 [module/filesystem]
 type = internal/fs
@@ -120,7 +141,7 @@ label-mode-background = ${colors.primary}
 ; focused = Active workspace on focused monitor
 label-focused = %index%
 label-focused-background = ${colors.bg1}
-label-focused-underline= ${colors.primary}
+label-focused-overline = ${colors.primary}
 label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
