@@ -17,15 +17,42 @@
 ;==========================================================
 
 [colors]
-;background = ${xrdb:color0:#222}
-background = #222
-background-alt = #444
-;foreground = ${xrdb:color7:#222}
-foreground = #dfdfdf
-foreground-alt = #555
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
+; gruvbox
+bg0 = #282828
+bg1 = #3c3836
+bg2 = #504945
+bg3 = #665c54
+bg4 = #7c6f64
+fg4 = #a89984
+fg3 = #bdae93
+fg2 = #d5c4a1
+fg1 = #ebdbb2
+fg0 = #fbf1c7
+
+red1 = #cc241d
+red9 = #fb4934
+green2 = #94971a
+green10 = #b8bb26
+yellow3 = #d79921
+yellow11 = #fabd2f
+blue4 = #458588
+blue12 = #83a598
+purple5 = #b16286
+purple13 = #d3869b
+aqua6 = #689d6a
+aqua14 = #8ec07c
+gray7 = #a89984
+gray8 = #928374
+orange166 = #d65d0e
+orange208 = #fe8019
+
+background = #1d2021
+foreground = ${colors.fg1}
+foreground-alt = ${colors.fg4}
+
+primary = ${colors.blue4}
+secondary = ${colors.blue12}
+alert = ${colors.orange208}
 
 [bar/mainbar]
 ; monitor = ${env:MONITOR:DP2}
@@ -92,7 +119,7 @@ label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
 label-focused = %index%
-label-focused-background = ${colors.background-alt}
+label-focused-background = ${colors.bg1}
 label-focused-underline= ${colors.primary}
 label-focused-padding = 2
 
