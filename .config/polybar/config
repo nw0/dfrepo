@@ -127,40 +127,37 @@ label-unmounted-foreground = ${colors.foreground-alt}
 
 [module/i3]
 type = internal/i3
-format = <label-state> <label-mode>
 index-sort = false
-wrapping-scroll = false
-
+enable-scroll = false
 ; Only show workspaces on the same output as the bar
 ;pin-workspaces = true
 
 label-mode-padding = 2
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
+label-mode-foreground = ${colors.background}
+label-mode-background = ${colors.alert}
 
 ; focused = Active workspace on focused monitor
 label-focused = %index%
-label-focused-background = ${colors.bg1}
+label-focused-background = ${colors.bg2}
 label-focused-overline = ${colors.primary}
 label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
+label-unfocused-foreground = ${colors.fg3}
 label-unfocused-padding = 2
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
 label-visible-background = ${self.label-focused-background}
-; label-visible-underline = ${colors.secondary}
-label-visible-padding = ${self.label-focused-padding}
+label-visible-overline = ${colors.gray8}
+label-visible-padding = 2
 
 ; urgent = Workspace with urgency hint set
 label-urgent = %index%
+label-urgent-foreground = ${colors.background}
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
-
-; Separator in between workspaces
-; label-separator = |
 
 
 [module/xbacklight]
