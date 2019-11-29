@@ -48,7 +48,7 @@ orange208 = #fe8019
 
 background = #1d2021
 foreground = ${colors.fg1}
-foreground-alt = ${colors.fg4}
+foreground-alt = ${colors.gray7}
 
 primary = ${colors.blue4}
 secondary = ${colors.blue12}
@@ -76,7 +76,7 @@ modules-right = xwindow
 width = 100%
 height = 20
 bottom = true
-fixed-center = false
+fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -84,16 +84,18 @@ foreground = ${colors.foreground}
 line-size = 2
 line-color = ${colors.foreground}
 border-size = 0
+padding-left = 1
+module-margin-left = 2
+module-margin-right = 1
 
-module-margin-left = 1
-module-margin-right = 2
+font-0 = Adobe Source Sans Pro:size=9;3
+font-1 = Adobe Source Sans Pro:size=8;3
+font-2 = Material Design Icons:size=11;3
+font-3 = Source Code Pro:size=6;2
 
-font-0 = Adobe Source Sans Pro:size=9;2
-font-1 = Material Design Icons;3
-
-modules-left =
-modules-center =
-modules-right = filesystem xbacklight pulseaudio memory cpu wlan eth battery temperature date
+modules-left = xbacklight pulseaudio
+modules-center= wlan eth battery filesystem
+modules-right = loadavg temperature memory date
 
 tray-position = right
 tray-padding = 2
@@ -154,17 +156,27 @@ label-urgent-padding = 2
 type = internal/xbacklight
 format =  <label>
 
-[module/cpu]
-type = internal/cpu
-interval = 2
-format-prefix = ""
-label = %percentage:2%%
+[module/loadavg]
+type = custom/script
+label-font = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+exec = cat /proc/loadavg | awk '{ print $1, $2, $3}'
+interval = 3
 
 [module/memory]
 type = internal/memory
-interval = 2
+interval = 4
+label-font = 2
+exec = cat /proc/loadavg | awk '{ print $1, $2, $3}'
+format = <bar-used> <label>
 format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
 label = %gb_free%
+bar-used-width = 8
+bar-used-indicator = ▓
+bar-used-fill = █
+bar-used-empty = ▒
 
 [module/wlan]
 type = internal/network
@@ -197,13 +209,12 @@ label-disconnected = %ifname%
 
 [module/date]
 type = internal/date
-interval = 5
+interval = 20
 
 date = %a %d %b
-
 time = %H:%M
 
-format-prefix = 
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 
 label = %date% %time%
@@ -267,7 +278,7 @@ format-warn = <label-warn>
 
 label = %temperature-c%
 label-warn = %temperature-c%
-label-warn-foreground = ${colors.secondary}
+label-warn-foreground = ${colors.alert}
 
 [settings]
 screenchange-reload = true
