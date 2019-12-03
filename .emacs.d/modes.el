@@ -39,4 +39,5 @@
 
 ;; ledger
 (use-package ledger-mode
-  :ensure t)
+  :ensure t
+  :hook (ledger-mode . (lambda () (mixed-pitch-mode -1))))

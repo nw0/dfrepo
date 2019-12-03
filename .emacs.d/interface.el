@@ -68,7 +68,8 @@
 
 ;; git
 (use-package magit
-  :ensure t)
+  :ensure t
+  :bind ("C-x g" . magit-status))
 
 ;; show diffs in gutter
 (use-package diff-hl
