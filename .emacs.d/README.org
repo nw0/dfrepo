@@ -67,6 +67,11 @@ Avoid calling =(package-initialize)= for performance; this saves me about 0.3s.
   (require 'bind-key))
 #+END_SRC
 
+** Org mode
+#+BEGIN_SRC emacs-lisp
+(setq org-src-tab-acts-natively t)
+#+END_SRC
+
 ** Load other files
 To begin, I've copied this directly from =init.el=.
 
