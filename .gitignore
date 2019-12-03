@@ -20,14 +20,17 @@
 /.emacs.d/bookmarks
 /.emacs.d/elpa/
 /.emacs.d/transient/
+/FiraxisLive/
 /.ghidra/
 /.gnupg/
+/go/
 /.lesshst
 /.local/share/
 /.mailcheckrc
 /.password-store/
 /.pki/
 /.pulse-cookie
+/.python_history
 /.rustup/
 /.ssh/
 /.steam/
