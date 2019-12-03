@@ -15,8 +15,15 @@ Like [[https://github.com/frap/emacs-literate/blob/master/readme.org][Andrés Ga
 *** Inspiration
 - [[https://github.com/frap/emacs-literate/blob/master/readme.org][Andrés Gasson]]
 
-** Initialisation
-*** Packages
+** Pre-initialisation
+This saves me about 0.3s.
+#+BEGIN_SRC emacs-lisp
+(eval-and-compile
+  (setq gc-cons-threshold (* 256 1024 1024)
+        gc-cons-percentage 10.0))
+#+END_SRC
+
+** Packages
 #+BEGIN_SRC emacs-lisp
 (require 'package)
 (setq gnutls-min-prime-bits 4096)
@@ -29,7 +36,7 @@ We don't use =custom= package settings, so a slight optimisation.
 (package-initialize)
 #+END_SRC
 
-**** Can't live without =use-package=
+*** Can't live without =use-package=
 #+BEGIN_SRC emacs-lisp
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -60,4 +67,11 @@ To begin, I've copied this directly from =init.el=.
       jit-lock-defer-time 0.05)
 ;; this helps org-bullets (and other unicode things?) load faster
 (setq inhibit-compacting-font-caches t)
+#+END_SRC
+
+** Post-initialisation
+Set this to a slightly less obnoxious value at end of init.
+#+BEGIN_SRC emacs-lisp
+(setq gc-cons-threshold (* 100 1024 1024)
+      gc-cons-percentage 0.2)
 #+END_SRC
