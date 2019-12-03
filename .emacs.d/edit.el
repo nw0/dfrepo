@@ -30,3 +30,10 @@
          ("C-d" . smart-hungry-delete-forward-char))
   :defer nil ;; dont defer so we can add our functions to hooks
   :config (smart-hungry-delete-add-default-hooks))
+
+(use-package flyspell
+  :ensure t
+  :hook ((text-mode . (lambda () (flyspell-mode 1)))
+         (prog-mode . (lambda () (flyspell-prog-mode))))
+  :config
+  (setq flyspell-issue-message-flag nil))
