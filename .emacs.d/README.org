@@ -72,6 +72,13 @@ Avoid calling =(package-initialize)= for performance; this saves me about 0.3s.
 (setq org-src-tab-acts-natively t)
 #+END_SRC
 
+** Interface
+*** Scroll more like Vim
+#+BEGIN_SRC emacs-lisp
+(setq scroll-step 1
+      scroll-margin 2)
+#+END_SRC
+
 ** Load other files
 To begin, I've copied this directly from =init.el=.
 
