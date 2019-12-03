@@ -1,11 +1,46 @@
 #+TITLE: Emacs configuration
 #+AUTHOR: Nicholas Sim (nw0)
+#+PROPERTY: header-args :tangle yes
 
-* Load other files
+* Emacs configuration
+** Preliminaries
+*** About
+This is my attempt at a literate emacs configuration.
+It's largely because I've found writing comments and multiple files in elisp rather unwieldy.
+**** Auto-tangle
+Like [[https://github.com/frap/emacs-literate/blob/master/readme.org][Andrés Gasson]], I define this property to tangle most code blocks in this file.
+#+BEGIN_SRC org :tangle no
+#+PROPERTY: header-args :tangle yes
+#+END_SRC
+*** Inspiration
+- [[https://github.com/frap/emacs-literate/blob/master/readme.org][Andrés Gasson]]
+
+** Initialisation
+*** Packages
+#+BEGIN_SRC emacs-lisp
+(require 'package)
+(setq gnutls-min-prime-bits 4096)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+#+END_SRC
+
+We don't use =custom= package settings, so a slight optimisation.
+#+BEGIN_SRC emacs-lisp
+(setq package-enable-at-startup nil)
+(package-initialize)
+#+END_SRC
+
+**** Can't live without =use-package=
+#+BEGIN_SRC emacs-lisp
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(require 'use-package)
+#+END_SRC
+
+** Load other files
 To begin, I've copied this directly from =init.el=.
 
 #+BEGIN_SRC emacs-lisp
-(load-file "~/.emacs.d/packages.el")
 ;; Custom things
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
