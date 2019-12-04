@@ -79,6 +79,29 @@ Avoid calling =(package-initialize)= for performance; this saves me about 0.3s.
 (setq org-src-tab-acts-natively t)
 #+END_SRC
 
+** Editor
+*** Unicode
+This should be the default, but just to be sure.
+#+BEGIN_SRC emacs-lisp
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(setq coding-system-for-read 'utf-8
+      coding-system-for-write 'utf-8
+      default-buffer-file-coding-system 'utf-8)
+#+END_SRC
+
+*** Whitespace
+Clean trailing ws from touched lines, and ensure EOF.
+#+BEGIN_SRC emacs-lisp
+(setq require-final-newline t)      ; less insanity
+(use-package ws-butler
+  :ensure t
+  :diminish
+  :hook ((prog-mode org-mode) . ws-butler-mode))
+#+END_SRC
+
 ** Interface
 *** Annoyances
 #+BEGIN_SRC emacs-lisp
@@ -103,6 +126,20 @@ This must be placed after =custom-safe-themes=
 (when (>= emacs-major-version 26)
   (setq display-line-numbers-type 'relative)
   (global-display-line-numbers-mode))
+#+END_SRC
+
+*** Highlight symbols
+This is less obtrusive than =auto-highlight-symbol=, which changes the bg under the cursor.
+Note that =highlight-symbol= sets a face, which has lower priority than overlays (e.g. from =hl-line=)
+#+BEGIN_SRC emacs-lisp
+(use-package highlight-symbol
+  :ensure t
+  :diminish
+  :hook ((prog-mode . highlight-symbol-mode)
+         (prog-mode . highlight-symbol-nav-mode))
+  :config
+  (setq highlight-symbol-idle-delay 0.8
+        hightlight-symbol-on-navigation-p t))
 #+END_SRC
 
 *** Evil mode
