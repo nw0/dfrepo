@@ -102,6 +102,21 @@ Clean trailing ws from touched lines, and ensure EOF.
   :hook ((prog-mode org-mode) . ws-butler-mode))
 #+END_SRC
 
+*** Flycheck
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+#+END_SRC
+
+*** Project
+Search with =ripgrep=
+#+BEGIN_SRC emacs-lisp
+(use-package deadgrep
+  :ensure t
+  :bind ("<f5>" . deadgrep))
+#+END_SRC
+
 ** Interface
 *** Annoyances
 #+BEGIN_SRC emacs-lisp
@@ -140,6 +155,18 @@ Note that =highlight-symbol= sets a face, which has lower priority than overlays
   :config
   (setq highlight-symbol-idle-delay 0.8
         hightlight-symbol-on-navigation-p t))
+#+END_SRC
+
+*** Highlight TODOs
+#+BEGIN_SRC emacs-lisp
+(use-package fic-mode
+  :ensure t
+  :diminish
+  :hook prog-mode
+  :config
+  (set-face-attribute 'fic-face nil
+                      :foreground "orange"
+                      :background "gray30"))
 #+END_SRC
 
 *** Evil mode
