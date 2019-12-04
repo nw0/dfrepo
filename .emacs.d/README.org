@@ -52,8 +52,8 @@ Avoid calling =(package-initialize)= for performance; this saves me about 0.3s.
 
 *** Can't live without =use-package=
 #+BEGIN_SRC emacs-lisp
-(setq use-package-always-defer t
-      use-package-verbose t)
+;; (setq use-package-always-defer t)
+(setq use-package-verbose t)
 
 (eval-when-compile
   (package-initialize)
