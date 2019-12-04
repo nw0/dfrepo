@@ -1,17 +1,6 @@
 ;; User interface settings
 
 
-;; Theme: this won't load properly if it's before custom-safe-themes
-(use-package gruvbox-theme
-  :ensure t
-  :config
-  (load-theme 'gruvbox))
-
-;; Line numbering
-(when (>= emacs-major-version 26)
-  (setq display-line-numbers-type 'relative)
-  (global-display-line-numbers-mode))
-
 ;; adapted from https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 (setq delete-old-versions -1            ; delete excess backup versions silently
       version-control t                 ; use version control
@@ -30,21 +19,13 @@
 (delete-selection-mode t)
 ;; (global-auto-revert-mode t)
 
-;; don't show unneeded things
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-
-(line-number-mode 1)                ; default, but be sure
 (column-number-mode 1)              ; in the modeline
-(blink-cursor-mode -1)              ; this is annoying (graphical only)
 (global-font-lock-mode t)           ; syntax highlighting
 (global-hl-line-mode t)
 
 (show-paren-mode t)                 ; highlight matching parentheses
 (setq show-paren-delay 0.0
       blink-matching-paren nil)
-
 
 ;; ahh
 (global-set-key (kbd "<home>") 'beginning-of-line)

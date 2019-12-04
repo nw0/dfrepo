@@ -16,11 +16,18 @@ Like [[https://github.com/frap/emacs-literate/blob/master/readme.org][Andrés Ga
 - [[https://github.com/frap/emacs-literate/blob/master/readme.org][Andrés Gasson]]
 
 ** Pre-initialisation
+*** Optimisation for load
 This saves me about 0.3s.
 #+BEGIN_SRC emacs-lisp
 (eval-and-compile
   (setq gc-cons-threshold (* 256 1024 1024)
         gc-cons-percentage 10.0))
+#+END_SRC
+
+*** =custom= files
+#+BEGIN_SRC emacs-lisp
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
 #+END_SRC
 
 ** Packages
@@ -73,24 +80,70 @@ Avoid calling =(package-initialize)= for performance; this saves me about 0.3s.
 #+END_SRC
 
 ** Interface
-*** Scroll more like Vim
+*** Annoyances
+#+BEGIN_SRC emacs-lisp
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(blink-cursor-mode -1)              ; graphical only
+#+END_SRC
+
+*** Theme
+This must be placed after =custom-safe-themes=
+#+BEGIN_SRC emacs-lisp
+(use-package gruvbox-theme
+  :ensure t
+  :config
+  (load-theme 'gruvbox))
+#+END_SRC
+
+*** Relative line numbering
+#+BEGIN_SRC emacs-lisp
+(line-number-mode 1)                ; default, but be sure
+(when (>= emacs-major-version 26)
+  (setq display-line-numbers-type 'relative)
+  (global-display-line-numbers-mode))
+#+END_SRC
+
+*** Evil mode
+#+BEGIN_SRC emacs-lisp
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t ; This is optional since it's already set to t by default.
+        evil-want-keybinding nil
+        evil-want-C-i-jump nil)
+  :config
+  (evil-mode 1)
+  (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
+  (define-key evil-normal-state-map "\C-a" 'beginning-of-line)
+  (define-key evil-insert-state-map "\C-a" 'beginning-of-line)
+  (define-key evil-visual-state-map "\C-a" 'beginning-of-line)
+  (define-key evil-normal-state-map "\C-e" 'end-of-line)
+  (define-key evil-insert-state-map "\C-e" 'end-of-line)
+  (define-key evil-visual-state-map "\C-e" 'end-of-line))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
+#+END_SRC
+
+Scroll more like Vim.
 #+BEGIN_SRC emacs-lisp
 (setq scroll-step 1
-      scroll-margin 2)
+      scroll-margin 2
+      scroll-conservatively 10000)
 #+END_SRC
 
 ** Load other files
 To begin, I've copied this directly from =init.el=.
 
 #+BEGIN_SRC emacs-lisp
-;; Custom things
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file)
-
 (load-file "~/.emacs.d/org.el")
 (load-file "~/.emacs.d/interface.el")
 (load-file "~/.emacs.d/edit.el")
-(load-file "~/.emacs.d/evil.el")
 (load-file "~/.emacs.d/modes.el")
 
 ;; less frequent garbage collection
