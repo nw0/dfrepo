@@ -14,7 +14,20 @@
 # ignored as irrelevant
 /.cache/
 /.cargo/
+/.config/Thunar/
+/.config/borg/security/
+/.config/cef_user_data/
+/.config/dconf/
+/.config/evince/
+/.config/evolution/
+/.config/gtk-3.0/bookmarks
+/.config/htop/
+/.config/libreoffice/
+/.config/mimeapps.list
+/.config/sqlitebrowser
 /.config/systemd/user/*.target.wants/
+/.config/unity3d/
+/.config/xfce4/
 /.dfrepo/
 /.emacs.d/auto-save-list
 /.emacs.d/bookmarks
@@ -23,7 +36,9 @@
 /FiraxisLive/
 /.ghidra/
 /.gnupg/
+/.gradle/
 /go/
+/.ipython/
 /.lesshst
 /.local/share/
 /.mailcheckrc
