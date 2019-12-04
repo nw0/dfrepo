@@ -24,24 +24,47 @@ This saves me about 0.3s.
 #+END_SRC
 
 ** Packages
+*** Another optimisation
+Avoid calling =(package-initialize)= for performance; this saves me about 0.3s.
 #+BEGIN_SRC emacs-lisp
-(require 'package)
-(setq gnutls-min-prime-bits 4096)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(eval-and-compile
+  (setq load-prefer-newer t
+        package-user-dir "~/.emacs.d/elpa"
+        package--init-file-ensured t
+        package-enable-at-startup nil)
+
+  (unless (file-directory-p package-user-dir)
+    (make-directory package-user-dir t))
+  (setq load-path (append load-path (directory-files package-user-dir t "^[^.]" t))))
 #+END_SRC
 
-We don't use =custom= package settings, so a slight optimisation.
+*** Want org, melpa
 #+BEGIN_SRC emacs-lisp
-(setq package-enable-at-startup nil)
-(package-initialize)
+(eval-when-compile
+  (require 'package)
+
+  (setq gnutls-min-prime-bits 4096)
+  (unless (assoc-default "melpa" package-archives)
+    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t))
+  (unless (assoc-default "org" package-archives)
+    (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)))
 #+END_SRC
 
 *** Can't live without =use-package=
 #+BEGIN_SRC emacs-lisp
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(require 'use-package)
+(setq use-package-always-defer t
+      use-package-verbose t)
+
+(eval-when-compile
+  (package-initialize)
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+  (unless (package-installed-p 'bind-key)
+    (package-refresh-contents)
+    (package-install 'bind-key))
+  (require 'use-package)
+  (require 'bind-key))
 #+END_SRC
 
 ** Org mode
