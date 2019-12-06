@@ -2,7 +2,7 @@
 #+AUTHOR: Nicholas Sim (nw0)
 #+PROPERTY: header-args :tangle yes
 
-* Emacs configuration
+* Configuration
 ** Preliminaries
 *** About
 This is my attempt at a literate emacs configuration.
@@ -74,6 +74,14 @@ Avoid calling =(package-initialize)= for performance; this saves me about 0.3s.
   (require 'bind-key))
 #+END_SRC
 
+*** Diminish, to clean up modeline
+#+BEGIN_SRC emacs-lisp
+(use-package diminish
+  :ensure t
+  :config
+  (diminish 'eldoc-mode))
+#+END_SRC
+
 ** Org mode
 #+BEGIN_SRC emacs-lisp
 (setq org-src-tab-acts-natively t)
@@ -102,11 +110,34 @@ Clean trailing ws from touched lines, and ensure EOF.
   :hook ((prog-mode org-mode) . ws-butler-mode))
 #+END_SRC
 
+*** Backups, VC
+#+BEGIN_SRC emacs-lisp
+(setq delete-old-versions -1            ; delete excess backup versions silently
+      version-control t                 ; use version control
+      vc-make-backup-files t            ; make backups file even when
+                                        ; in version controlled dir
+      backup-directory-alist `(("." . "~/.emacs.d/backups"))
+      vc-follow-symlinks t              ; don't confirm opening symlinked file
+      auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
+#+END_SRC
+
 *** Flycheck
 #+BEGIN_SRC emacs-lisp
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode))
+#+END_SRC
+
+*** Flyspell
+This requires =aspell=, and dictionaries (=aspell-en=).
+#+BEGIN_SRC emacs-lisp
+(use-package flyspell
+  :ensure t
+  :diminish
+  :hook ((text-mode . (lambda () (flyspell-mode 1)))
+         (prog-mode . (lambda () (flyspell-prog-mode))))
+  :config
+  (setq flyspell-issue-message-flag nil))
 #+END_SRC
 
 *** Project
@@ -117,6 +148,15 @@ Search with =ripgrep=
   :bind ("<f5>" . deadgrep))
 #+END_SRC
 
+*** Completion
+#+BEGIN_SRC emacs-lisp
+(use-package company
+  :ensure t
+  :diminish company-mode
+  :hook (after-init . global-company-mode)
+  )
+#+END_SRC
+
 ** Interface
 *** Annoyances
 #+BEGIN_SRC emacs-lisp
@@ -124,6 +164,28 @@ Search with =ripgrep=
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (blink-cursor-mode -1)              ; graphical only
+(transient-mark-mode 1)
+(delete-selection-mode t)           ; delete selection by DEL or overwriting
+(column-number-mode 1)              ; in the modeline
+
+(setq inhibit-startup-screen t
+      ring-bell-function 'ignore
+      sentence-end-double-space nil
+      fill-column 79)
+
+(global-set-key (kbd "<home>") 'beginning-of-line)
+(global-set-key (kbd "<end>") 'end-of-line)
+#+END_SRC
+
+*** How to use emacs??
+#+BEGIN_SRC emacs-lisp
+(use-package which-key
+  :ensure t
+  :diminish which-key-mode
+  :init (which-key-mode)
+  :config
+  (which-key-setup-side-window-bottom)
+  (setq which-key-idle-delay 0.5))
 #+END_SRC
 
 *** Theme
@@ -133,6 +195,8 @@ This must be placed after =custom-safe-themes=
   :ensure t
   :config
   (load-theme 'gruvbox))
+
+(set-face-attribute 'default nil :height 140)
 #+END_SRC
 
 *** Relative line numbering
@@ -143,7 +207,15 @@ This must be placed after =custom-safe-themes=
   (global-display-line-numbers-mode))
 #+END_SRC
 
-*** Highlight symbols
+*** Highlighting
+#+BEGIN_SRC emacs-lisp
+(global-font-lock-mode t)       ; syntax highlighting
+(global-hl-line-mode t)         ; don't get lost
+(show-paren-mode t)             ; highlight matching parentheses
+(setq show-paren-delay 0.0
+      blink-matching-paren nil)
+#+END_SRC
+
 This is less obtrusive than =auto-highlight-symbol=, which changes the bg under the cursor.
 Note that =highlight-symbol= sets a face, which has lower priority than overlays (e.g. from =hl-line=)
 #+BEGIN_SRC emacs-lisp
@@ -167,6 +239,24 @@ Note that =highlight-symbol= sets a face, which has lower priority than overlays
   (set-face-attribute 'fic-face nil
                       :foreground "orange"
                       :background "gray30"))
+#+END_SRC
+
+*** Mixed-pitch mode
+Slightly nicer to use variable-width fonts when not programming
+#+BEGIN_SRC emacs-lisp
+(use-package mixed-pitch
+  :ensure t
+  :hook  (text-mode . mixed-pitch-mode))
+#+END_SRC
+
+*** Pangu
+Show spaces between latin/cjk characters
+#+BEGIN_SRC emacs-lisp
+(use-package pangu-spacing
+  :ensure t
+  :diminish
+  :config
+  (global-pangu-spacing-mode 1))
 #+END_SRC
 
 *** Evil mode
@@ -201,12 +291,26 @@ Scroll more like Vim.
       scroll-conservatively 10000)
 #+END_SRC
 
+*** Git
+#+BEGIN_SRC emacs-lisp
+(use-package magit
+  :ensure t
+  :bind ("C-x g" . magit-status))
+
+(use-package diff-hl
+  :ensure t
+  :init
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+  :config
+  (global-diff-hl-mode 1)
+  (diff-hl-flydiff-mode 1))
+#+END_SRC
+
 ** Load other files
 To begin, I've copied this directly from =init.el=.
 
 #+BEGIN_SRC emacs-lisp
 (load-file "~/.emacs.d/org.el")
-(load-file "~/.emacs.d/interface.el")
 (load-file "~/.emacs.d/edit.el")
 (load-file "~/.emacs.d/modes.el")
 
