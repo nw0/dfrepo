@@ -134,8 +134,8 @@ This requires =aspell=, and dictionaries (=aspell-en=).
 (use-package flyspell
   :ensure t
   :diminish
-  :hook ((text-mode . (lambda () (flyspell-mode 1)))
-         (prog-mode . (lambda () (flyspell-prog-mode))))
+  :hook ((text-mode . flyspell-mode)
+         (prog-mode . flyspell-prog-mode))
   :config
   (setq flyspell-issue-message-flag nil))
 #+END_SRC
@@ -154,6 +154,8 @@ Search with =ripgrep=
   :ensure t
   :diminish company-mode
   :hook (after-init . global-company-mode)
+  :custom
+  (company-idle-delay .2)
   )
 #+END_SRC
 
@@ -167,14 +169,28 @@ Search with =ripgrep=
 (transient-mark-mode 1)
 (delete-selection-mode t)           ; delete selection by DEL or overwriting
 (column-number-mode 1)              ; in the modeline
+(global-auto-revert-mode 1)
 
 (setq inhibit-startup-screen t
       ring-bell-function 'ignore
       sentence-end-double-space nil
       fill-column 79)
 
-(global-set-key (kbd "<home>") 'beginning-of-line)
+(global-set-key (kbd "<home>") 'my/beginning-of-line)
 (global-set-key (kbd "<end>") 'end-of-line)
+#+END_SRC
+
+Slightly insidious change to =C-a=, due to [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org][Mathieu Marques]].
+#+BEGIN_SRC emacs-lisp
+(global-set-key [remap move-beginning-of-line] #'my/beginning-of-line)
+
+(defun my/beginning-of-line ()
+  "Move point to first non-whitespace character, or beginning of line."
+  (interactive "^")
+  (let ((origin (point)))
+    (beginning-of-line)
+    (and (= origin (point))
+         (back-to-indentation))))
 #+END_SRC
 
 *** How to use emacs??
@@ -270,9 +286,9 @@ Show spaces between latin/cjk characters
   :config
   (evil-mode 1)
   (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
-  (define-key evil-normal-state-map "\C-a" 'beginning-of-line)
-  (define-key evil-insert-state-map "\C-a" 'beginning-of-line)
-  (define-key evil-visual-state-map "\C-a" 'beginning-of-line)
+  (define-key evil-normal-state-map "\C-a" 'my/beginning-of-line)
+  (define-key evil-insert-state-map "\C-a" 'my/beginning-of-line)
+  (define-key evil-visual-state-map "\C-a" 'my/beginning-of-line)
   (define-key evil-normal-state-map "\C-e" 'end-of-line)
   (define-key evil-insert-state-map "\C-e" 'end-of-line)
   (define-key evil-visual-state-map "\C-e" 'end-of-line))
