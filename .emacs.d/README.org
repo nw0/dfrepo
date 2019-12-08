@@ -257,6 +257,15 @@ Note that =highlight-symbol= sets a face, which has lower priority than overlays
                       :background "gray30"))
 #+END_SRC
 
+*** Show colours of colours
+#+BEGIN_SRC emacs-lisp
+(use-package rainbow-mode
+  :ensure t
+  :diminish
+  :config
+  (setq rainbow-x-colors nil)
+  (add-hook 'prog-mode-hook 'rainbow-mode))
+#+END_SRC
 *** Mixed-pitch mode
 Slightly nicer to use variable-width fonts when not programming
 #+BEGIN_SRC emacs-lisp
