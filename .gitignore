@@ -5,6 +5,7 @@
 /BrowserHomes/
 /cheri/
 /Mail/
+/Music
 /org/
 /personal/
 /repos/
@@ -24,6 +25,7 @@
 /.config/htop/
 /.config/libreoffice/
 /.config/mimeapps.list
+/.config/mpd/
 /.config/sqlitebrowser
 /.config/systemd/user/*.target.wants/
 /.config/unity3d/
