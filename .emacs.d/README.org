@@ -228,7 +228,7 @@ Slightly insidious change to =C-a=, due to [[https://github.com/angrybacon/dotem
   (setq which-key-idle-delay 0.5))
 #+END_SRC
 
-*** Theme
+*** Theming
 This must be placed after =custom-safe-themes=
 #+BEGIN_SRC emacs-lisp
 (use-package gruvbox-theme
@@ -237,6 +237,10 @@ This must be placed after =custom-safe-themes=
   (load-theme 'gruvbox))
 
 (set-face-attribute 'default nil :height 140)
+(use-package smart-mode-line
+  :ensure t
+  :config
+  (sml/setup))
 #+END_SRC
 
 *** Relative line numbering
