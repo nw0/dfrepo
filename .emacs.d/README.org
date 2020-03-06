@@ -294,6 +294,38 @@ Note that =highlight-symbol= sets a face, which has lower priority than overlays
   (setq rainbow-x-colors nil)
   (add-hook 'prog-mode-hook 'rainbow-mode))
 #+END_SRC
+
+*** Completion
+#+BEGIN_SRC emacs-lisp
+(use-package counsel
+  :ensure t
+  :after ivy)
+
+(use-package swiper
+  :ensure t
+  :after ivy
+  :bind (("C-s" . swiper)
+         ("C-r" . swiper)))
+
+(defun ivy--custom-basic (str)
+  "Match things like in base-Emacs, bash, language-shells, etc. etc."
+  (ivy--regex-fuzzy (concat "^" str)))
+
+(use-package ivy
+  :ensure t
+  :diminish
+  :bind (("C-x C-f" . counsel-find-file)
+         ("C-c k" . counsel-rg)
+         ("<f2> i" . counsel-info-lookup-symbol)
+         ("<f2> u" . counsel-unicode-char)
+         ("<f2> j" . counsel-set-variable)
+         ("C-c J" . counsel-file-jump))
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (setq ivy-re-builders-alist '((t . ivy--custom-basic))))
+#+END_SRC
 *** Mixed-pitch mode
 Slightly nicer to use variable-width fonts when not programming
 #+BEGIN_SRC emacs-lisp
@@ -348,7 +380,9 @@ Scroll more like Vim.
 #+BEGIN_SRC emacs-lisp
 (use-package magit
   :ensure t
-  :bind ("C-x g" . magit-status))
+  :bind ("C-x g" . magit-status)
+  :config
+  (setq magit-completing-read-function 'ivy-completing-read))
 
 (use-package diff-hl
   :ensure t
