@@ -13,19 +13,25 @@
 /work/
 
 # ignored as irrelevant
+/.android/
 /.cache/
 /.cargo/
+/.config/ario/
 /.config/Thunar/
 /.config/borg/security/
 /.config/cef_user_data/
 /.config/dconf/
+/.config/dleyna-renderer-service.conf
 /.config/evince/
 /.config/evolution/
 /.config/gtk-3.0/bookmarks
 /.config/htop/
+/.config/Keybase
+/.config/keybase
 /.config/libreoffice/
 /.config/mimeapps.list
 /.config/mpd/
+/.config/pulse/
 /.config/sqlitebrowser
 /.config/systemd/user/*.target.wants/
 /.config/unity3d/
@@ -34,6 +40,8 @@
 /.emacs.d/auto-save-list
 /.emacs.d/bookmarks
 /.emacs.d/elpa/
+/.emacs.d/ido.last
+/.emacs.d/README.el
 /.emacs.d/transient/
 /FiraxisLive/
 /.ghidra/
@@ -41,9 +49,12 @@
 /.gradle/
 /go/
 /.ipython/
+/.jack-settings
+/.jack-server/
 /.lesshst
 /.local/share/
 /.mailcheckrc
+/.ncmpcpp/
 /.password-store/
 /.pki/
 /.pulse-cookie
