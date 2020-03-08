@@ -15,4 +15,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(fixed-pitch ((t (:family "Fira Mono"))))
+ '(sml/filename ((t (:foreground "salmon" :weight bold))))
+ '(sml/modified ((t (:inherit sml/not-modified :foreground "salmon" :weight bold))))
  '(variable-pitch ((t (:family "Nimbus Sans")))))
