@@ -128,10 +128,20 @@ This should be the default, but just to be sure.
 Clean trailing ws from touched lines, and ensure EOF.
 #+BEGIN_SRC emacs-lisp
 (setq require-final-newline t)      ; less insanity
+
 (use-package ws-butler
   :ensure t
   :diminish
   :hook ((prog-mode org-mode) . ws-butler-mode))
+
+(setq-default show-trailing-whitespace t)
+(dolist (hook '(special-mode-hook
+                term-mode-hook
+                comint-mode-hook
+                compilation-mode-hook
+                minibuffer-setup-hook))
+  (add-hook hook
+            (lambda () (setq show-trailing-whitespace nil))))
 #+END_SRC
 
 *** Backups, VC
@@ -299,7 +309,10 @@ Note that =highlight-symbol= sets a face, which has lower priority than overlays
 #+BEGIN_SRC emacs-lisp
 (use-package counsel
   :ensure t
-  :after ivy)
+  :after ivy
+  :diminish
+  :config
+  (counsel-mode))
 
 (use-package swiper
   :ensure t
@@ -307,7 +320,7 @@ Note that =highlight-symbol= sets a face, which has lower priority than overlays
   :bind (("C-s" . swiper)
          ("C-r" . swiper)))
 
-(defun ivy--custom-basic (str)
+(defun ivy--fuzzy-start (str)
   "Match things like in base-Emacs, bash, language-shells, etc. etc."
   (ivy--regex-fuzzy (concat "^" str)))
 
@@ -319,12 +332,23 @@ Note that =highlight-symbol= sets a face, which has lower priority than overlays
          ("<f2> i" . counsel-info-lookup-symbol)
          ("<f2> u" . counsel-unicode-char)
          ("<f2> j" . counsel-set-variable)
-         ("C-c J" . counsel-file-jump))
-  :config
+         ("C-c J" . counsel-file-jump)
+         ("M-x" . counsel-M-x))
+  ;; load eagerly so ivy-rich loads correctly
+  :init
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
-  (setq ivy-re-builders-alist '((t . ivy--custom-basic))))
+  (setq ivy-re-builders-alist '((counsel-find-file . ivy--fuzzy-start)
+                                (t . ivy--regex-plus))))
+
+(use-package ivy-rich
+  :ensure t
+  :after (ivy counsel)
+  :config
+  (setq ivy-rich-path-style 'abbrev)
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
+  (ivy-rich-mode 1))
 #+END_SRC
 *** Mixed-pitch mode
 Slightly nicer to use variable-width fonts when not programming

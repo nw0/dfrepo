@@ -3,8 +3,7 @@
 
 (setq-default tab-width 4
               tab-stop-list '(4 8 12)
-              indent-tabs-mode nil
-              show-trailing-whitespace t)
+              indent-tabs-mode nil)
 
 (use-package smart-hungry-delete
   :ensure t
