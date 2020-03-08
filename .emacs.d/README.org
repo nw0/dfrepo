@@ -177,6 +177,19 @@ This requires =aspell=, and dictionaries (=aspell-en=).
 *** Project
 Search with =ripgrep=
 #+BEGIN_SRC emacs-lisp
+(use-package projectile
+  :ensure t
+  :diminish
+  :config
+  (projectile-mode +1)
+  (define-key projectile-mode-map (kbd "<f9>") 'projectile-command-map))
+
+(use-package counsel-projectile
+  :ensure t
+  :after (projectile ivy counsel)
+  :config
+  (counsel-projectile-mode))
+
 (use-package deadgrep
   :ensure t
   :bind ("<f5>" . deadgrep))
