@@ -12,9 +12,19 @@
                                    (python-indent-dedent-line-backspace arg)
                                  (smart-hungry-delete-backward-char arg)))))
   :config
-  (setq tab-width 4
-        python-basic-offset 4
-        python-indent-offset 4))
+  (setq python-basic-offset 4
+        python-indent-offset 4)
+  (flycheck-define-checker
+      python-mypy ""
+      :command ("mypy"
+               "--ignore-missing-imports" "--fast-parser"
+               "--python-version" "3.7"
+               source-original)
+      :error-patterns
+      ((error line-start (file-name) ":" line ": error:" (message) line-end))
+      :modes python-mode)
+  (add-to-list 'flycheck-checkers 'python-mypy t)
+  (flycheck-add-next-checker 'python-pylint 'python-mypy t))
 
 (use-package company-anaconda
   :ensure t

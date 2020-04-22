@@ -165,6 +165,10 @@ Clean trailing ws from touched lines, and ensure EOF.
       backup-directory-alist `(("." . "~/.emacs.d/backups"))
       vc-follow-symlinks t              ; don't confirm opening symlinked file
       auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
+
+(use-package undo-tree
+  :ensure t
+  :diminish)
 #+END_SRC
 
 *** Flycheck
@@ -218,6 +222,12 @@ Search with =ripgrep=
   )
 #+END_SRC
 
+*** Line wrap
+#+BEGIN_SRC emacs-lisp
+(setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
+(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+#+END_SRC
+
 ** Interface
 *** Annoyances
 #+BEGIN_SRC emacs-lisp
@@ -269,7 +279,7 @@ This must be placed after =custom-safe-themes=
 (use-package gruvbox-theme
   :ensure t
   :config
-  (load-theme 'gruvbox))
+  (load-theme 'gruvbox-dark-hard))
 
 (set-face-attribute 'default nil :height 140)
 (use-package smart-mode-line

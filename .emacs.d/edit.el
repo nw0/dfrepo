@@ -1,7 +1,7 @@
 (global-prettify-symbols-mode t)    ; nice lambda symbols
 (electric-pair-mode 1)              ; auto-insert closing parens, and more
 
-(setq-default tab-width 4
+(setq-default tab-width 8
               tab-stop-list '(4 8 12)
               indent-tabs-mode nil)
 
