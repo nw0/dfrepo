@@ -64,6 +64,7 @@
 /.steam/
 /.steampath
 /.steampid
+/.tmux/resurrect/
 /.vim/
 /.viminfo
 /.vscode-oss/
