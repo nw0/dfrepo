@@ -99,6 +99,10 @@ Avoid calling =(package-initialize)= for performance; this saves me about 0.3s.
         org-startup-folded nil
         org-startup-indented 'f
         org-src-tab-acts-natively t
+        org-log-done t
+        org-agenda-span 17
+        org-agenda-start-on-weekday nil
+        org-agenda-start-day "-3d"
         org-agenda-files '("~/org"))
   (eval-after-load 'org-indent '(diminish 'org-indent-mode))
   )
@@ -109,6 +113,14 @@ Avoid calling =(package-initialize)= for performance; this saves me about 0.3s.
   :hook
   (org-mode . org-bullets-mode)
   )
+
+(defun org-agenda-force-refresh ()
+  (interactive)
+  (when (get-buffer "*Org Agenda*")
+    (with-current-buffer "*Org Agenda*"
+                         (org-agenda-maybe-redo)
+                         (message "[org agenda] refreshed!"))))
+(global-set-key (kbd "C-c r") 'org-agenda-force-refresh)
 #+END_SRC
 
 ** Editor
