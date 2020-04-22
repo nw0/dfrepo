@@ -30,3 +30,5 @@
     rss = restore --staged
     s   = status
     st  = stash
+[credential]
+    helper = store
