@@ -20,6 +20,7 @@ set title
 set bg=dark
 
 set number
+set printoptions=number:y
 set relativenumber
 " Highlight the current line
 set cursorline
@@ -36,8 +37,6 @@ hi ColorColumn      ctermbg=237
 set scrolloff=2
 
 set incsearch
-if maparg('<C-L>', 'n') ==# ''
-  nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
-endif
+set hlsearch
 
 set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
