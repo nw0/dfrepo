@@ -71,3 +71,12 @@
 /.wget-hsts
 /.xsession-errors
 /.xsession-errors.old
+
+# work
+/.python_history
+/.sqlite_history
+/.vmware/
+/VMs/
+/mnt/
+/vm-share/
+/vmware/
