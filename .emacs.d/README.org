@@ -31,53 +31,32 @@ This saves me about 0.3s.
 #+END_SRC
 
 ** Packages
-*** Another optimisation
-Avoid calling =(package-initialize)= for performance; this saves me about 0.3s.
+*** Use =straight=, not =package.el=
 #+BEGIN_SRC emacs-lisp
-(eval-and-compile
-  (setq load-prefer-newer t
-        package-user-dir "~/.emacs.d/elpa"
-        package--init-file-ensured t
-        package-enable-at-startup nil)
-
-  (unless (file-directory-p package-user-dir)
-    (make-directory package-user-dir t))
-  (setq load-path (append load-path (directory-files package-user-dir t "^[^.]" t))))
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 #+END_SRC
 
-*** Want org, melpa
+*** Need =use-package=
 #+BEGIN_SRC emacs-lisp
-(eval-when-compile
-  (require 'package)
-
-  (setq gnutls-min-prime-bits 4096)
-  (unless (assoc-default "melpa" package-archives)
-    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t))
-  (unless (assoc-default "org" package-archives)
-    (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)))
-#+END_SRC
-
-*** Can't live without =use-package=
-#+BEGIN_SRC emacs-lisp
-;; (setq use-package-always-defer t)
-(setq use-package-verbose t)
-
-(eval-when-compile
-  (package-initialize)
-  (unless (package-installed-p 'use-package)
-    (package-refresh-contents)
-    (package-install 'use-package))
-  (unless (package-installed-p 'bind-key)
-    (package-refresh-contents)
-    (package-install 'bind-key))
-  (require 'use-package)
-  (require 'bind-key))
+(straight-use-package 'use-package)
+(straight-use-package 'bind-key)
 #+END_SRC
 
 *** Diminish, to clean up modeline
 #+BEGIN_SRC emacs-lisp
 (use-package diminish
-  :ensure t
+  :straight t
   :config
   (diminish 'eldoc-mode))
 #+END_SRC
@@ -135,7 +114,7 @@ Clean trailing ws from touched lines, and ensure EOF.
 (setq require-final-newline t)      ; less insanity
 
 (use-package ws-butler
-  :ensure t
+  :straight t
   :diminish
   :hook ((prog-mode org-mode) . ws-butler-mode))
 
@@ -160,14 +139,14 @@ Clean trailing ws from touched lines, and ensure EOF.
       auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 
 (use-package undo-tree
-  :ensure t
+  :straight t
   :diminish)
 #+END_SRC
 
 *** Flycheck
 #+BEGIN_SRC emacs-lisp
 (use-package flycheck
-  :ensure t
+  :straight t
   :init (global-flycheck-mode))
 #+END_SRC
 
@@ -175,7 +154,7 @@ Clean trailing ws from touched lines, and ensure EOF.
 This requires =aspell=, and dictionaries (=aspell-en=).
 #+BEGIN_SRC emacs-lisp
 (use-package flyspell
-  :ensure t
+  :straight t
   :diminish
   :hook ((text-mode . flyspell-mode)
          (prog-mode . flyspell-prog-mode))
@@ -187,27 +166,27 @@ This requires =aspell=, and dictionaries (=aspell-en=).
 Search with =ripgrep=
 #+BEGIN_SRC emacs-lisp
 (use-package projectile
-  :ensure t
+  :straight t
   :diminish
   :config
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "<f9>") 'projectile-command-map))
 
 (use-package counsel-projectile
-  :ensure t
+  :straight t
   :after (projectile ivy counsel)
   :config
   (counsel-projectile-mode))
 
 (use-package deadgrep
-  :ensure t
+  :straight t
   :bind ("<f5>" . deadgrep))
 #+END_SRC
 
 *** Completion
 #+BEGIN_SRC emacs-lisp
 (use-package company
-  :ensure t
+  :straight t
   :diminish company-mode
   :hook (after-init . global-company-mode)
   :custom
@@ -275,7 +254,7 @@ Slightly insidious change to =C-a=, due to [[https://github.com/angrybacon/dotem
 *** How to use emacs??
 #+BEGIN_SRC emacs-lisp
 (use-package which-key
-  :ensure t
+  :straight t
   :diminish which-key-mode
   :init (which-key-mode)
   :config
@@ -287,7 +266,7 @@ Slightly insidious change to =C-a=, due to [[https://github.com/angrybacon/dotem
 This must be placed after =custom-safe-themes=
 #+BEGIN_SRC emacs-lisp
 (use-package gruvbox-theme
-  :ensure t
+  :straight t
   :config
   (load-theme 'gruvbox-dark-hard))
 
@@ -319,7 +298,7 @@ This is less obtrusive than =auto-highlight-symbol=, which changes the bg under 
 Note that =highlight-symbol= sets a face, which has lower priority than overlays (e.g. from =hl-line=)
 #+BEGIN_SRC emacs-lisp
 (use-package highlight-symbol
-  :ensure t
+  :straight t
   :diminish
   :hook ((prog-mode . highlight-symbol-mode)
          (prog-mode . highlight-symbol-nav-mode))
@@ -331,7 +310,7 @@ Note that =highlight-symbol= sets a face, which has lower priority than overlays
 *** Highlight TODOs
 #+BEGIN_SRC emacs-lisp
 (use-package fic-mode
-  :ensure t
+  :straight t
   :diminish
   :hook prog-mode
   :config
@@ -343,7 +322,7 @@ Note that =highlight-symbol= sets a face, which has lower priority than overlays
 *** Show colours of colours
 #+BEGIN_SRC emacs-lisp
 (use-package rainbow-mode
-  :ensure t
+  :straight t
   :diminish
   :config
   (setq rainbow-x-colors nil)
@@ -353,14 +332,14 @@ Note that =highlight-symbol= sets a face, which has lower priority than overlays
 *** Completion
 #+BEGIN_SRC emacs-lisp
 (use-package counsel
-  :ensure t
+  :straight t
   :after ivy
   :diminish
   :config
   (counsel-mode))
 
 (use-package swiper
-  :ensure t
+  :straight t
   :after ivy
   :bind (("C-s" . swiper)
          ("C-r" . swiper)))
@@ -370,7 +349,7 @@ Note that =highlight-symbol= sets a face, which has lower priority than overlays
   (ivy--regex-fuzzy (concat "^" str)))
 
 (use-package ivy
-  :ensure t
+  :straight t
   :diminish
   :bind (("C-x C-f" . counsel-find-file)
          ("C-c k" . counsel-rg)
@@ -388,18 +367,19 @@ Note that =highlight-symbol= sets a face, which has lower priority than overlays
                                 (t . ivy--regex-plus))))
 
 (use-package ivy-rich
-  :ensure t
+  :straight t
   :after (ivy counsel)
   :config
   (setq ivy-rich-path-style 'abbrev)
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   (ivy-rich-mode 1))
 #+END_SRC
+
 *** Mixed-pitch mode
 Slightly nicer to use variable-width fonts when not programming
 #+BEGIN_SRC emacs-lisp
 (use-package mixed-pitch
-  :ensure t
+  :straight t
   :hook  (text-mode . mixed-pitch-mode))
 #+END_SRC
 
@@ -407,7 +387,7 @@ Slightly nicer to use variable-width fonts when not programming
 Show spaces between latin/cjk characters
 #+BEGIN_SRC emacs-lisp
 (use-package pangu-spacing
-  :ensure t
+  :straight t
   :diminish
   :config
   (global-pangu-spacing-mode 1))
@@ -416,7 +396,7 @@ Show spaces between latin/cjk characters
 *** Evil mode
 #+BEGIN_SRC emacs-lisp
 (use-package evil
-  :ensure t
+  :straight t
   :init
   (setq evil-want-integration t ; This is optional since it's already set to t by default.
         evil-want-keybinding nil
@@ -433,7 +413,7 @@ Show spaces between latin/cjk characters
 
 (use-package evil-collection
   :after evil
-  :ensure t
+  :straight t
   :config
   (evil-collection-init))
 #+END_SRC
@@ -448,13 +428,13 @@ Scroll more like Vim.
 *** Git
 #+BEGIN_SRC emacs-lisp
 (use-package magit
-  :ensure t
+  :straight t
   :bind ("C-x g" . magit-status)
   :config
   (setq magit-completing-read-function 'ivy-completing-read))
 
 (use-package diff-hl
-  :ensure t
+  :straight t
   :init
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
   :config
@@ -472,7 +452,7 @@ Scroll more like Vim.
 *** C/CPP
 #+BEGIN_SRC emacs-lisp
 (use-package irony
-  :ensure t)
+  :straight t)
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
 (add-hook 'objc-mode-hook 'irony-mode)
@@ -497,7 +477,7 @@ Scroll more like Vim.
 *** Rust
 #+BEGIN_SRC emacs-lisp
 (use-package rust-mode
-  :ensure t
+  :straight t
   :defer t
   :mode "\\.rs\\'"
 ;;  :config (setq rust-format-on-save t)
@@ -505,7 +485,7 @@ Scroll more like Vim.
 
 ;; Run cargo commands in rust buffers, e.g. C-c C-c C-r for cargo-run
 (use-package cargo
-  :ensure t
+  :straight t
   :diminish
   :hook (rust-mode . cargo-minor-mode)
   :init
@@ -513,7 +493,7 @@ Scroll more like Vim.
   )
 
 (use-package racer
-  :ensure t
+  :straight t
   :diminish
   :init
   (add-hook 'rust-mode-hook #'racer-mode)
@@ -525,7 +505,7 @@ Scroll more like Vim.
 
 ;; Doesn't work, json-read-error
 (use-package flycheck-rust
-  :ensure t
+  :straight t
   :init
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 #+END_SRC
