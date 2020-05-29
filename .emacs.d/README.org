@@ -107,13 +107,6 @@ Avoid calling =(package-initialize)= for performance; this saves me about 0.3s.
   (eval-after-load 'org-indent '(diminish 'org-indent-mode))
   )
 
-(use-package org-bullets
-  :ensure t
-  :after (org)
-  :hook
-  (org-mode . org-bullets-mode)
-  )
-
 (defun org-agenda-force-refresh ()
   (interactive)
   (when (get-buffer "*Org Agenda*")
