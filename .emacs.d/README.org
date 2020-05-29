@@ -221,6 +221,23 @@ Search with =ripgrep=
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 #+END_SRC
 
+*** Temporary
+#+BEGIN_SRC emacs-lisp
+(global-prettify-symbols-mode t)    ; nice lambda symbols
+(electric-pair-mode 1)              ; auto-insert closing parens, and more
+
+(setq-default tab-width 8
+              tab-stop-list '(4 8 12)
+              indent-tabs-mode nil)
+
+(use-package smart-hungry-delete
+  :straight t
+  :bind (("<backspace>" . smart-hungry-delete-backward-char)
+         ("C-d" . smart-hungry-delete-forward-char))
+  :defer nil ;; dont defer so we can add our functions to hooks
+  :config (smart-hungry-delete-add-default-hooks))
+#+END_SRC
+
 ** Interface
 *** Annoyances
 #+BEGIN_SRC emacs-lisp
@@ -516,16 +533,75 @@ Scroll more like Vim.
 *** TOML
 #+BEGIN_SRC emacs-lisp
 (use-package toml-mode
-  :ensure t)
+  :straight t)
+#+END_SRC
+
+*** Python
+#+BEGIN_SRC emacs-lisp
+(use-package anaconda-mode
+  :straight t
+  :after smart-hungry-delete
+  :diminish
+  :hook (python-mode . anaconda-mode)
+  :bind (:map python-mode-map
+              ([backspace] . (lambda (&optional arg)
+                               "Call `smart-hungry-delete-backward-char' unless point is directly after the indentation, in which case call `python-indent-dedent-line-backspace'."
+                               (interactive)
+                               (if (looking-back "^[\t ]+")
+                                   (python-indent-dedent-line-backspace arg)
+                                 (smart-hungry-delete-backward-char arg)))))
+  :config
+  (setq python-basic-offset 4
+        python-indent-offset 4)
+  (flycheck-define-checker
+      python-mypy ""
+      :command ("mypy"
+               "--ignore-missing-imports" "--fast-parser"
+               "--python-version" "3.7"
+               source-original)
+      :error-patterns
+      ((error line-start (file-name) ":" line ": error:" (message) line-end))
+      :modes python-mode)
+  (add-to-list 'flycheck-checkers 'python-mypy t)
+  (flycheck-add-next-checker 'python-pylint 'python-mypy t))
+
+(use-package company-anaconda
+  :straight t
+  :after (company anaconda-mode)
+  :config
+  (add-to-list 'company-backends 'company-anaconda))
+#+END_SRC
+
+*** Markdown
+#+BEGIN_SRC emacs-lisp
+(use-package markdown-mode
+  :straight t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+#+END_SRC
+
+*** YAML
+#+BEGIN_SRC emacs-lisp
+(use-package yaml-mode
+  :straight t
+  :hook
+  (yaml-mode . (lambda () (mixed-pitch-mode -1))))
+#+END_SRC
+
+*** Ledger
+#+BEGIN_SRC emacs-lisp
+(use-package ledger-mode
+  :straight t
+  :hook (ledger-mode . (lambda () (mixed-pitch-mode -1))))
 #+END_SRC
 
 ** Load other files
 To begin, I've copied this directly from =init.el=.
 
 #+BEGIN_SRC emacs-lisp
-(load-file "~/.emacs.d/edit.el")
-(load-file "~/.emacs.d/modes.el")
-
 ;; less frequent garbage collection
 (setq gc-cons-threshold (* 100 1024 1024)) ;; 100 mb
 ;; Allow font-lock-mode to do background parsing
