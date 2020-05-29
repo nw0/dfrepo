@@ -412,6 +412,7 @@ Show spaces between latin/cjk characters
 
 *** Evil mode
 #+BEGIN_SRC emacs-lisp
+;; (setq evil-want-keybinding nil)
 (use-package evil
   :straight t
   :init
@@ -517,7 +518,7 @@ Scroll more like Vim.
   (add-hook 'racer-mode-hook #'eldoc-mode)
   :config
   (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
-  (setq racer-rust-src-path "/usr/local/src/rust/src")
+  ;;(setq racer-rust-src-path "/usr/local/src/rust/src")
   )
 
 ;; Doesn't work, json-read-error
