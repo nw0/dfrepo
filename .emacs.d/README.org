@@ -285,13 +285,15 @@ This must be placed after =custom-safe-themes=
 (use-package gruvbox-theme
   :straight t
   :config
-  (load-theme 'gruvbox-dark-hard))
+  (load-theme 'gruvbox))
 
-(set-face-attribute 'default nil :height 140)
+(set-face-attribute 'default nil :height 135)
+(set-face-font 'fixed-pitch "Fira Code")
+(set-face-font 'variable-pitch "Nimbus Sans")
+
 (use-package smart-mode-line
-  :ensure t
-  :config
-  (sml/setup))
+  :straight t
+  :config (sml/setup))
 #+END_SRC
 
 *** Relative line numbering
