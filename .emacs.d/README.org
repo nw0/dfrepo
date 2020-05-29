@@ -238,17 +238,34 @@ Search with =ripgrep=
 (global-set-key (kbd "<end>") 'end-of-line)
 #+END_SRC
 
-Slightly insidious change to =C-a=, due to [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org][Mathieu Marques]].
+Slightly insidious change to =C-a=, due to [https://gist.github.com/X4lldux/5649195]
 #+BEGIN_SRC emacs-lisp
 (global-set-key [remap move-beginning-of-line] #'my/beginning-of-line)
 
 (defun my/beginning-of-line ()
-  "Move point to first non-whitespace character, or beginning of line."
+  "Move point to beginning-of-line or first non-whitespace character or first non-whitespace after a comment sign."
   (interactive "^")
-  (let ((origin (point)))
-    (beginning-of-line)
-    (and (= origin (point))
-         (back-to-indentation))))
+  (let (
+        (oldpos (point))
+        (indentpos (progn
+                     (back-to-indentation)
+                     (point)
+                     )
+                   )
+        (textpos (progn
+                   (beginning-of-line-text)
+                   (point)
+                   )
+                 )
+        )
+    (cond
+     ((> oldpos textpos) (beginning-of-line-text))
+     ((and (<= oldpos textpos) (> oldpos indentpos))  (back-to-indentation))
+     ((and (<= oldpos indentpos) (> oldpos (line-beginning-position))) (beginning-of-line))
+     (t (beginning-of-line-text))
+     )
+    )
+  )
 #+END_SRC
 
 *** How to use emacs??
