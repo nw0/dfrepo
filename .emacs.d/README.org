@@ -123,6 +123,8 @@ Clean trailing ws from touched lines, and ensure EOF.
                 term-mode-hook
                 comint-mode-hook
                 compilation-mode-hook
+                eshell-mode-hook
+                elfeed-search-mode-hook
                 minibuffer-setup-hook))
   (add-hook hook
             (lambda () (setq show-trailing-whitespace nil))))
@@ -328,14 +330,17 @@ Note that =highlight-symbol= sets a face, which has lower priority than overlays
 
 *** Highlight TODOs
 #+BEGIN_SRC emacs-lisp
-(use-package fic-mode
+(use-package hl-todo
   :straight t
   :diminish
-  :hook prog-mode
   :config
-  (set-face-attribute 'fic-face nil
-                      :foreground "orange"
-                      :background "gray30"))
+  (setq hl-todo-keyword-faces
+        '(("TODO"   . "red")
+          ("FIXME"  . "orange")
+          ("DEBUG"  . "dodger blue")
+          ("GOTCHA" . "salmon")
+          ("STUB"   . "purple")))
+  (global-hl-todo-mode))
 #+END_SRC
 
 *** Show colours of colours
