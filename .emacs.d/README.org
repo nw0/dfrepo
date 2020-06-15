@@ -270,6 +270,19 @@ Slightly insidious change to =C-a=, due to [https://gist.github.com/X4lldux/5649
   )
 #+END_SRC
 
+Don't go to the newline at end of buffer
+#+BEGIN_SRC emacs-lisp
+(defun my-end-of-buffer ()
+  "Go to beginning of last line in buffer.
+If last line is empty, go to beginning of penultimate one
+instead."
+  (interactive)
+  (goto-char (point-max))
+  (beginning-of-line (and (looking-at-p "^$") 0)))
+
+(global-set-key [remap end-of-buffer] #'my-end-of-buffer)
+#+END_SRC
+
 *** How to use emacs??
 #+BEGIN_SRC emacs-lisp
 (use-package which-key
@@ -432,6 +445,7 @@ Show spaces between latin/cjk characters
   (define-key evil-normal-state-map "\C-a" 'my/beginning-of-line)
   (define-key evil-insert-state-map "\C-a" 'my/beginning-of-line)
   (define-key evil-visual-state-map "\C-a" 'my/beginning-of-line)
+  (define-key evil-normal-state-map "G" 'my-end-of-buffer)
   (define-key evil-normal-state-map "\C-e" 'end-of-line)
   (define-key evil-insert-state-map "\C-e" 'end-of-line)
   (define-key evil-visual-state-map "\C-e" 'end-of-line))
