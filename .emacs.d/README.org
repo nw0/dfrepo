@@ -302,10 +302,6 @@ This must be placed after =custom-safe-themes=
   :config
   (load-theme 'gruvbox))
 
-(set-face-attribute 'default nil :height 135)
-(set-face-font 'fixed-pitch "Fira Code")
-(set-face-font 'variable-pitch "Nimbus Sans")
-
 (use-package smart-mode-line
   :straight t
   :config (sml/setup))
@@ -415,8 +411,11 @@ Note that =highlight-symbol= sets a face, which has lower priority than overlays
 *** Mixed-pitch mode
 Slightly nicer to use variable-width fonts when not programming
 #+BEGIN_SRC emacs-lisp
+(set-face-attribute 'default nil :height 130)
+
 (use-package mixed-pitch
   :straight t
+  :after (org)
   :hook  (text-mode . mixed-pitch-mode))
 #+END_SRC
 

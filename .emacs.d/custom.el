@@ -17,4 +17,5 @@
  '(org-verbatim ((t (:inherit shadow :foreground "gray"))))
  '(sml/filename ((t (:foreground "salmon" :weight bold))))
  '(sml/modified ((t (:inherit sml/not-modified :foreground "salmon" :weight bold))))
- )
+ '(fixed-pitch ((t (:family "Fira Code"))))
+ '(variable-pitch ((t (:family "Liberation Sans")))))
