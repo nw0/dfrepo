@@ -439,12 +439,24 @@ Show spaces between latin/cjk characters
         evil-want-keybinding nil
         evil-want-C-i-jump nil)
   :config
+  (evil-define-motion my-evil-goto-line (count)
+    "Go to the first non-blank character of line COUNT.
+By default the last line."
+    :jump t
+    :type line
+    (if (null count)
+        (with-no-warnings (my-end-of-buffer))
+      (goto-char (point-min))
+      (forward-line (1- count)))
+    (evil-first-non-blank))
+
   (evil-mode 1)
+  (define-key evil-insert-state-map (kbd "M-RET") (kbd "M-j"))
   (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
   (define-key evil-normal-state-map "\C-a" 'my/beginning-of-line)
   (define-key evil-insert-state-map "\C-a" 'my/beginning-of-line)
   (define-key evil-visual-state-map "\C-a" 'my/beginning-of-line)
-  (define-key evil-normal-state-map "G" 'my-end-of-buffer)
+  (define-key evil-normal-state-map "G" 'my-evil-goto-line)
   (define-key evil-normal-state-map "\C-e" 'end-of-line)
   (define-key evil-insert-state-map "\C-e" 'end-of-line)
   (define-key evil-visual-state-map "\C-e" 'end-of-line))
