@@ -58,14 +58,16 @@ This saves me about 0.3s.
 (use-package diminish
   :straight t
   :config
-  (diminish 'eldoc-mode))
+  (diminish 'eldoc-mode)
+  (diminish 'visual-line-mode))
 #+END_SRC
 
 ** Org mode
 #+BEGIN_SRC emacs-lisp
 ;;;Org mode configuration
 (use-package org
-  :bind (("C-c a" . org-agenda))
+  :bind (:map org-mode-map
+              ("C-c a" . org-agenda))
   :hook
   ;; fix the indentation for variable-pitch
   (after-init . (lambda ()
@@ -84,17 +86,99 @@ This saves me about 0.3s.
         org-agenda-start-day "-3d"
         org-agenda-files '("~/org"))
   (eval-after-load 'org-indent '(diminish 'org-indent-mode))
+  (setq org-latex-pdf-process (list "latexmk -f -pdf %f"))
   )
+
 
 (defun org-agenda-force-refresh ()
   (interactive)
   (when (get-buffer "*Org Agenda*")
     (with-current-buffer "*Org Agenda*"
-                         (org-agenda-maybe-redo)
-                         (message "[org agenda] refreshed!"))))
+      (org-agenda-maybe-redo)
+      (message "[org agenda] refreshed!"))))
 (global-set-key (kbd "C-c r") 'org-agenda-force-refresh)
 #+END_SRC
 
+*** Org-roam
+#+BEGIN_SRC emacs-lisp
+(use-package org-roam
+  :straight t
+  :diminish
+  :hook
+  (after-init . org-roam-mode)
+  :custom
+  (org-roam-directory "~/org/roam")
+  :bind (:map org-roam-mode-map
+              (("C-c n l" . org-roam)
+               ("C-c n f" . org-roam-find-file)
+               ("C-c n j" . org-roam-jump-to-index)
+               ("C-c n b" . org-roam-switch-to-buffer)
+               ("C-c n g" . org-roam-graph))
+              :map org-mode-map
+              (("C-c n i" . org-roam-insert)))
+  :config
+  (setq org-roam-capture-templates
+        `(("d" "default" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "%<%Y%m%d%H%M%S>-${slug}"
+           :head "#+TITLE: ${title}\n"
+           :unnarrowed t)
+          ("p" "resource" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "%<%Y%m%d%H%M%S>-${slug}"
+           :head ,(concat
+                   "#+TITLE: ${title}\n\n"
+                   "- tags :: \n"
+                   "- citation :: \n"
+                   "- date read: %(format-time-string \"%Y-%m-%d\")\n\n"
+                   "# Note: NO CLASSIFIED MATERIAL\n\n"
+                   "* Relevance\n"
+                   "# Why now?\n"
+                   "# Why is this interesting?\n"
+                   "# Before reading: why did you select this paper?\n"
+                   "\n"
+                   "* Objectively, what are the contributions of this work?\n"
+                   "\n"
+                   "* Problem\n"
+                   "# What is the problem?\n"
+                   "# Why is it important?\n"
+                   "# Does the work improve on prior art?\n"
+                   "# Why was this not done previously?\n"
+                   "\n"
+                   "* The work\n"
+                   "# What was done?\n"
+                   "# How does it address the problem?\n"
+                   "# How is it unique or innovative?\n"
+                   "# Give details.\n"
+                   "\n"
+                   "* Evaluation\n"
+                   "# What are the pertinent questions the authors try to address?\n"
+                   "# What do the authors say about the system/the work?\n"
+                   "# Is the evaluation any good? What are the unaddressed problems and why unaddressed? Limitations?\n"
+                   "# Was it presented fairly?\n"
+                   "\n"
+                   "* Up to 6 pros/cons of the work\n"
+                   "# Optional: may not be relevant for this format.\n"
+                   "\n"
+                   "* Overall opinion\n"
+                   "# How do you feel about the work?\n"
+                   "# Did it turn out to be relevant?\n"
+                   "# Would you utilise the findings of this work?\n"
+                   "\n"
+                   "* Questions\n"
+                   "# At least two questions for the authors.\n"
+                   "# Optional if this is not the first reading.\n"
+                   "* Related work\n"
+                   "# Do you wish to highlight any related work? Give reasons.")
+           :unnarrowed t)
+          )))
+
+(use-package company-org-roam
+  :straight (:host github :repo "org-roam/company-org-roam")
+  :after (company)
+  :config
+  (push 'company-org-roam company-backends))
+#+END_SRC
 ** Editor
 *** Unicode
 This should be the default, but just to be sure.
@@ -416,6 +500,7 @@ Slightly nicer to use variable-width fonts when not programming
 (use-package mixed-pitch
   :straight t
   :after (org)
+  :diminish
   :hook  (text-mode . mixed-pitch-mode))
 #+END_SRC
 
