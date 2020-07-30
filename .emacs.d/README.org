@@ -480,8 +480,20 @@ Note that =highlight-symbol= sets a face, which has lower priority than overlays
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
+  (add-to-list 'ivy-ignore-buffers "\\*Compile-Log\\*")
+  (add-to-list 'ivy-ignore-buffers "\\*magit-.*")
+  (add-to-list 'ivy-ignore-buffers "\\magit-.*")
+  (add-to-list 'ivy-ignore-buffers "\\*Flycheck.*")
+  (add-to-list 'ivy-ignore-buffers "\\*lsp-.*")
+  (with-eval-after-load "projectile"
+    (setf projectile-globally-ignored-buffers ivy-ignore-buffers))
   (setq ivy-re-builders-alist '((counsel-find-file . ivy--fuzzy-start)
                                 (t . ivy--regex-plus))))
+
+(use-package ivy-prescient
+  :straight t
+  :after ivy
+  :init (ivy-prescient-mode))
 
 (use-package ivy-rich
   :straight t
