@@ -590,6 +590,22 @@ Scroll more like Vim.
 #+END_SRC
 
 ** Modes
+*** LSP
+#+BEGIN_SRC emacs-lisp
+;; (use-package lsp-mode
+;;   :straight t
+;;   :hook ((rust-mode . lsp)
+;;          (lsp-mode . lsp-enable-which-key-integration))
+;;   :commands lsp
+;;   :config
+;;   (setq lsp-rust-server 'rust-analyzer))
+
+;; (use-package lsp-ui
+;;   :straight t)
+
+;; (use-package lsp-ivy
+;;  :straight t)
+#+END_SRC
 *** Elisp
 #+BEGIN_SRC emacs-lisp
 (setq-default c-basic-offset 2
