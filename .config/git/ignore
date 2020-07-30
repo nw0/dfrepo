@@ -4,3 +4,36 @@
 .idea/
 *.iml
 *.txss
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+## Org-mode
+.org-id-locations
+*_archive
+
+## flymake-mode
+*_flymake.*
+
+## reftex files
+*.rel
+
+## cask packages
+.cask/
+dist/
+
+## Flycheck
+flycheck_*.el
+
+## projectiles files
+.projectile
+
+## directory configuration
+.dir-locals.el

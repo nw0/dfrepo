@@ -14,6 +14,7 @@
 
 # ignored as irrelevant
 /.android/
+/.aspell.*
 /.cache/
 /.cargo/
 /.config/ario/
@@ -38,19 +39,10 @@
 /.config/xfce4/
 /.dfrepo/
 /.elfeed/
-/.emacs.d/auto-save-list
-/.emacs.d/bookmarks
-/.emacs.d/elpa/
-/.emacs.d/eshell/
-/.emacs.d/ido.last
-/.emacs.d/projectile-bookmarks.eld
-/.emacs.d/README.el
-/.emacs.d/recentf
-/.emacs.d/straight/
-/.emacs.d/transient/
-/.emacs.d/url/
 /FiraxisLive/
 /.ghidra/
+/ghidra-scripts/
+/.git-credentials
 /.gnupg/
 /.gradle/
 /go/
@@ -64,6 +56,7 @@
 /.password-store/
 /.pki/
 /.pulse-cookie
+/.pylint.d/
 /.python_history
 /.rustup/
 /.ssh/
