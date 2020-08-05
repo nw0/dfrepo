@@ -120,12 +120,16 @@ This saves me about 0.3s.
   (setq org-roam-capture-templates
         `(("d" "default" plain (function org-roam--capture-get-point)
            "%?"
-           :file-name "%<%Y%m%d%H%M%S>-${slug}"
-           :head "#+TITLE: ${title}\n"
+           :file-name "%<%Y%m%d>-${slug}"
+           :head "#+TITLE: ${title}\n\n- tags ::"
            :unnarrowed t)
+          ("h" "person" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "%<%Y%m%d>-${slug}"
+           :head "#+TITLE: ${title}\n\n- affiliation ::")
           ("p" "resource" plain (function org-roam--capture-get-point)
            "%?"
-           :file-name "%<%Y%m%d%H%M%S>-${slug}"
+           :file-name "%<%Y%m%d-${slug}"
            :head ,(concat
                    "#+TITLE: ${title}\n\n"
                    "- tags :: \n"
@@ -168,6 +172,7 @@ This saves me about 0.3s.
                    "* Questions\n"
                    "# At least two questions for the authors.\n"
                    "# Optional if this is not the first reading.\n"
+                   "\n"
                    "* Related work\n"
                    "# Do you wish to highlight any related work? Give reasons.")
            :unnarrowed t)
@@ -390,6 +395,15 @@ This must be placed after =custom-safe-themes=
   :straight t
   :config (sml/setup))
 #+END_SRC
+
+*** Getting around
+#+BEGIN_SRC emacs-lisp
+(use-package ace-window
+  :straight t
+  :config
+  (global-set-key (kbd "C-x o") 'ace-window)
+  (setq aw-keys '(?d ?h ?t ?n ?s ?i ?u ?e ?o ?a)))
+#+END_SRC emacs-lisp
 
 *** Relative line numbering
 #+BEGIN_SRC emacs-lisp
@@ -663,7 +677,6 @@ Scroll more like Vim.
   (add-hook 'racer-mode-hook #'eldoc-mode)
   :config
   (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
-  ;;(setq racer-rust-src-path "/usr/local/src/rust/src")
   )
 
 ;; Doesn't work, json-read-error
