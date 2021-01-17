@@ -32,3 +32,5 @@
     st  = stash
 [credential]
     helper = store
+[pull]
+	rebase = false
