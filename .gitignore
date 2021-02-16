@@ -27,6 +27,7 @@
 /.config/evolution/
 /.config/gtk-3.0/bookmarks
 /.config/htop/
+/.config/jgit/
 /.config/Keybase
 /.config/keybase
 /.config/libreoffice/
@@ -36,29 +37,38 @@
 /.config/sqlitebrowser
 /.config/systemd/user/*.target.wants/
 /.config/unity3d/
+/.config/user-dirs.dirs
+/.config/user-dirs.locale
+/.config/vlc/
 /.config/xfce4/
 /.dfrepo/
 /.elfeed/
+/.emacs.d/.lsp-session-v1
 /FiraxisLive/
 /.ghidra/
 /ghidra-scripts/
 /.git-credentials
 /.gnupg/
 /.gradle/
+/.g8/
 /go/
 /.ipython/
+/.ivy2/
 /.jack-settings
 /.jack-server/
+/.java/
 /.lesshst
+/.local/lib/
 /.local/share/
 /.mailcheckrc
+/.mozilla/firefox/
 /.ncmpcpp/
 /.password-store/
 /.pki/
 /.pulse-cookie
 /.pylint.d/
-/.python_history
 /.rustup/
+/.sbt/
 /.ssh/
 /.steam/
 /.steampath
@@ -71,9 +81,12 @@
 /.xsession-errors
 /.xsession-errors.old
 
-# work
+# history files
+/.bash_history
 /.python_history
 /.sqlite_history
+
+# work?
 /.vmware/
 /VMs/
 /mnt/
