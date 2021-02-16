@@ -46,10 +46,11 @@
 ;; Projectile, dired, magit, Fly*
 (require 'init-project)
 
-;; Modes
+;; Programming modes
+(require 'init-lsp)
 (require 'init-elisp)
-
-
+(require 'init-rust)
+(require 'init-markup)
 
 
 ;; Flycheck, Flyspell
@@ -70,23 +71,6 @@
   :config
   (global-pangu-spacing-mode 1))
 
-(use-package lsp-mode
-  :straight t
-  :init (setq lsp-keymap-prefix "C-c l"
-              lsp-print-performance t)
-  :hook ((rust-mode . lsp)
-         (lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp
-  :config
-  (setq lsp-rust-server 'rust-analyzer)
-  (setq lsp-ui-doc-enable nil
-        lsp-signature-auto-activate nil))
-
-;; (use-package lsp-ui
-;;   :straight t)
-
-(use-package lsp-ivy
- :straight t)
 (use-package irony
   :straight t)
 (add-hook 'c++-mode-hook 'irony-mode)
@@ -105,24 +89,6 @@
                             (setq c-basic-offset 4
                                   tab-width 4
                                   indent-tabs-mode t)))
-
-(use-package rust-mode
-  :straight t
-  :defer t
-  :mode "\\.rs\\'"
-  :bind (:map rust-mode-map ("M-<return>" . comment-indent-new-line))
-  :config
-    (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
-  )
-
-;; Doesn't work, json-read-error
-(use-package flycheck-rust
-  :straight t
-  :init
-  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
-
-(use-package toml-mode
-  :straight t)
 
 (use-package anaconda-mode
   :straight t
@@ -157,21 +123,10 @@
   :config
   (add-to-list 'company-backends 'company-anaconda))
 
-(use-package markdown-mode
-  :straight t
-  :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "multimarkdown"))
-
-(use-package yaml-mode
-  :straight t
-  :hook
-  (yaml-mode . (lambda () (mixed-pitch-mode -1))))
 (use-package ledger-mode
   :straight t
   :hook (ledger-mode . (lambda () (mixed-pitch-mode -1))))
+
 (use-package elfeed
   :straight t
   :bind ("C-x w" . 'elfeed)
