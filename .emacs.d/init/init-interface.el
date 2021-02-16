@@ -34,6 +34,7 @@
 
 (use-package ivy
   :straight t
+  :after swiper
   :diminish
   :bind (("C-x C-f" . counsel-find-file)
          ("C-c k" . counsel-rg)
@@ -41,12 +42,15 @@
          ("<f2> u" . counsel-unicode-char)
          ("<f2> j" . counsel-set-variable)
          ("C-c J" . counsel-file-jump)
-         ("M-x" . counsel-M-x))
+         ("M-x" . counsel-M-x)
+         :map minibuffer-inactive-mode-map
+         ("M-RET" . ivy-immediate-done))
   ;; load eagerly so ivy-rich loads correctly
   :init
   (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq enable-recursive-minibuffers t)
+  (setq ivy-use-virtual-buffers t
+        ivy-use-selectable-prompt t
+        enable-recursive-minibuffers t)
   (add-to-list 'ivy-ignore-buffers "\\*Compile-Log\\*")
   (add-to-list 'ivy-ignore-buffers "\\*magit-.*")
   (add-to-list 'ivy-ignore-buffers "\\magit-.*")

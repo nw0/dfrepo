@@ -22,9 +22,14 @@
 
 (use-package magit
   :straight t
+  :after evil
   :bind ("C-x g" . magit-status)
   :config
-  (setq magit-completing-read-function 'ivy-completing-read))
+  (setq magit-completing-read-function 'ivy-completing-read)
+  (evil-set-initial-state 'magit-status-mode 'emacs)
+  (evil-set-initial-state 'magit-mode 'emacs)
+  (evil-set-initial-state 'magit-log-mode 'emacs)
+  (evil-set-initial-state 'magit-popup-mode 'emacs))
 
 (use-package flycheck
   :straight t)

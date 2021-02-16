@@ -108,7 +108,7 @@ By default the last line."
 
 (use-package smart-hungry-delete
   :straight t
-  :bind (("<backspace>" . smart-hungry-delete-backward-char)
+  :bind (("C-<backspace>" . smart-hungry-delete-backward-char)
          ("C-d" . smart-hungry-delete-forward-char))
   :defer nil ;; dont defer so we can add our functions to hooks
   :config (smart-hungry-delete-add-default-hooks))

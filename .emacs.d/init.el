@@ -130,7 +130,7 @@
   :diminish
   :hook (python-mode . anaconda-mode)
   :bind (:map python-mode-map
-              ([backspace] . (lambda (&optional arg)
+              ("C-<backspace>" . (lambda (&optional arg)
                                "Call `smart-hungry-delete-backward-char' unless point is directly after the indentation, in which case call `python-indent-dedent-line-backspace'."
                                (interactive)
                                (if (looking-back "^[\t ]+")
@@ -207,6 +207,7 @@
   :straight t
   :after (elfeed)
   :config (elfeed-goodies/setup))
+
 (defun elfeed-mark-all-as-read ()
   (interactive)
   (mark-whole-buffer)
