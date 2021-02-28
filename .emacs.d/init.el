@@ -50,10 +50,9 @@
 (require 'init-lsp)
 (require 'init-elisp)
 (require 'init-rust)
+(require 'init-python)
 (require 'init-markup)
 
-
-;; Flycheck, Flyspell
 
 (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
 
@@ -89,39 +88,6 @@
                             (setq c-basic-offset 4
                                   tab-width 4
                                   indent-tabs-mode t)))
-
-(use-package anaconda-mode
-  :straight t
-  :after smart-hungry-delete
-  :diminish
-  :hook (python-mode . anaconda-mode)
-  :bind (:map python-mode-map
-              ("C-<backspace>" . (lambda (&optional arg)
-                               "Call `smart-hungry-delete-backward-char' unless point is directly after the indentation, in which case call `python-indent-dedent-line-backspace'."
-                               (interactive)
-                               (if (looking-back "^[\t ]+")
-                                   (python-indent-dedent-line-backspace arg)
-                                 (smart-hungry-delete-backward-char arg)))))
-  :config
-  (setq python-basic-offset 4
-        python-indent-offset 4)
-  (flycheck-define-checker
-      python-mypy ""
-      :command ("mypy"
-               "--ignore-missing-imports" "--fast-parser"
-               "--python-version" "3.7"
-               source-original)
-      :error-patterns
-      ((error line-start (file-name) ":" line ": error:" (message) line-end))
-      :modes python-mode)
-  (add-to-list 'flycheck-checkers 'python-mypy t)
-  (flycheck-add-next-checker 'python-pylint 'python-mypy t))
-
-(use-package company-anaconda
-  :straight t
-  :after (company anaconda-mode)
-  :config
-  (add-to-list 'company-backends 'company-anaconda))
 
 (use-package ledger-mode
   :straight t
