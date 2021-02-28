@@ -253,6 +253,16 @@
   :config
   (push 'company-org-roam company-backends))
 
+(use-package tex
+  :hook ((tex-mode . lsp-deferred)
+         (latex-mode . lsp-deferred)))
+
+(use-package bibtex
+  :hook (bibtex-mode . lsp-deferred))
+
+(use-package lsp-latex
+  :straight t)
+
 
 (provide 'new-init)
 ;;; init.el ends here
