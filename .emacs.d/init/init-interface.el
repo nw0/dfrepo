@@ -7,6 +7,8 @@
 
 ;;; Code:
 
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 (use-package which-key
   :straight t
   :diminish which-key-mode
