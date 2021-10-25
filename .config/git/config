@@ -19,13 +19,14 @@
     ap  = add --patch
     br  = branch
     c   = commit
+    ca  = commit --amend
     co  = checkout
     cp  = cherry-pick
     df  = diff
     dfc = diff --cached
     f   = fetch
     m   = merge
-    rb  = rebase
+    r   = rebase
     rs  = restore
     rss = restore --staged
     s   = status

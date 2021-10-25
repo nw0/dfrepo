@@ -25,6 +25,7 @@
 /.config/dleyna-renderer-service.conf
 /.config/evince/
 /.config/evolution/
+/.config/gedit/
 /.config/gtk-3.0/bookmarks
 /.config/htop/
 /.config/jgit/
@@ -44,12 +45,15 @@
 /.dfrepo/
 /.elfeed/
 /.emacs.d/.lsp-session-v1
+/.emacs.d/.cache
+/.emacs.d/eln-cache
 /FiraxisLive/
 /.ghidra/
 /ghidra-scripts/
 /.git-credentials
 /.gnupg/
 /.gradle/
+/.gsutil/
 /.g8/
 /go/
 /.ipython/
@@ -58,12 +62,15 @@
 /.jack-server/
 /.java/
 /.lesshst
+/.local/bin/
 /.local/lib/
 /.local/share/
+/.local/state/
 /.mailcheckrc
 /.mozilla/firefox/
 /.ncmpcpp/
 /.password-store/
+/.pgpass
 /.pki/
 /.pulse-cookie
 /.pylint.d/
@@ -76,13 +83,15 @@
 /.tmux/resurrect/
 /.vim/
 /.viminfo
+/.vpython*
 /.vscode-oss/
 /.wget-hsts
-/.xsession-errors
-/.xsession-errors.old
+/.Xauthority
+/.xsession-errors*
 
 # history files
 /.bash_history
+/.psql_history
 /.python_history
 /.sqlite_history
 
