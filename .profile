@@ -7,8 +7,9 @@ else
 fi
 export VISUAL=$EDITOR
 
+export __RVIM="vim -Z --clean '+set noswapfile' '+set nobackup' '+set nowritebackup' '+set viminfo=' '+set clipboard='"
 # if there's no rvim, explicit warning
-export SUDO_EDITOR=rvim
+export SUDO_EDITOR="$__RVIM"
 
 export PAGER=less
 export LESS="-FR"
