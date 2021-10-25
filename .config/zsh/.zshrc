@@ -3,7 +3,7 @@
 
 source ~/.config/zsh/completion.zsh
 source ~/.config/zsh/setopt.zsh
-source ~/.config/zsh/constants.zsh
+test -f "$HOME/.shrc" && . "$HOME/.shrc"
 source ~/.config/zsh/bindkeys.zsh
 source ~/.config/zsh/auto-ls-gs.zsh
 

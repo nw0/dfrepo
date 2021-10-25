@@ -1,0 +1,19 @@
+alias ls="ls -h --color=auto"
+alias la="ls -a"
+alias ll="ls -la"
+
+if [ -x "$(which colordiff)" ]; then
+    alias diff="colordiff -Nuar"
+else
+    alias diff="diff -Nuar --color=auto"
+fi
+
+alias egrep="egrep --color=auto"
+alias grep="egrep"
+
+alias ssh="TERM=xterm-256color ssh"
+
+# separate config for terminal emacs
+alias em='emacs -nw'
+
+alias dfgit="$(which git) --git-dir=$HOME/.dfrepo/ --work-tree=$HOME"
