@@ -59,7 +59,7 @@
 ;; modes -- all the modes
 ;; org mode, org roam
 (set-face-attribute 'default nil
-                    :family "Source Code Pro"
+                    :family "Fira Code"
                     :height 135
                     :weight 'normal
                     :width 'normal)

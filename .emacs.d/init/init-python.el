@@ -32,11 +32,11 @@
   (add-to-list 'flycheck-checkers 'python-mypy t)
   (flycheck-add-next-checker 'python-pylint 'python-mypy t))
 
-(use-package lsp-python-ms
+(use-package lsp-pyright
   :straight t
-  :defer t
-  :init (setq lsp-python-ms-auto-install-server t)
-  :hook (python-mode . lsp-deferred))
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-pyright)
+                         (lsp-deferred))))
 
 (use-package poetry
   :straight t
