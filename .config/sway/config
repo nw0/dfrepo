@@ -5,7 +5,8 @@
 # Read `man 5 sway` for a complete reference.
 
 input * {
-    xkb_layout "dvorak"
+    xkb_layout us
+    xkb_variant dvorak
     xkb_options ctrl:nocaps
 }
 
