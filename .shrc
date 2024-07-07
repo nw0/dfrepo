@@ -6,14 +6,13 @@ alias up="cd .."
 alias df="df -h"
 alias du="du -ch"
 
-if [ -x "$(which colordiff)" ]; then
+if [ -x "$(which colordiff 2> /dev/null)" ]; then
     alias diff="colordiff -Nuar"
 else
     alias diff="diff -Nuar --color=auto"
 fi
 
-alias egrep="egrep --color=auto"
-alias grep="egrep"
+alias grep="grep --color=auto"
 
 alias rvim=$__RVIM
 alias rvi=rvim
@@ -24,11 +23,11 @@ alias ssh="TERM=xterm-256color ssh"
 # separate config for terminal emacs
 alias em='emacs -nw'
 
-if [ -x "$(which drill)" ]; then
+if [ -x "$(which drill 2> /dev/null)" ]; then
     alias dig=drill
-elif [ -x "$(which dig)" ]; then
+elif [ -x "$(which dig 2> /dev/null)" ]; then
     # fallback
     alias drill=dig
 fi
 
-alias dfgit="$(which git) --git-dir=$HOME/.dfrepo/ --work-tree=$HOME"
+alias dfgit="git --git-dir=$HOME/.dfrepo/ --work-tree=$HOME"
