@@ -15,20 +15,7 @@
   :init (which-key-mode)
   :config
   (which-key-setup-side-window-bottom)
-  (setq which-key-idle-delay 0.5))
-
-(use-package counsel
-  :straight t
-  :after ivy
-  :diminish
-  :config
-  (counsel-mode))
-
-(use-package swiper
-  :straight t
-  :after ivy
-  :bind (("C-s" . swiper)
-         ("C-r" . swiper)))
+  (setq which-key-idle-delay 0.2))
 
 (defun ivy--fuzzy-start (str)
   "Match things like in base-Emacs, bash, language-shells, etc. etc."
@@ -36,7 +23,6 @@
 
 (use-package ivy
   :straight t
-  :after swiper
   :diminish
   :bind (("C-x C-f" . counsel-find-file)
          ("C-c k" . counsel-rg)
@@ -75,6 +61,19 @@
   (setq ivy-rich-path-style 'abbrev)
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   (ivy-rich-mode 1))
+
+(use-package counsel
+  :straight t
+  :after ivy
+  :diminish
+  :config
+  (counsel-mode))
+
+(use-package swiper
+  :straight t
+  :after ivy
+  :bind (("C-s" . swiper)
+         ("C-r" . swiper)))
 
 ;; how to use multiple windows
 (use-package ace-window

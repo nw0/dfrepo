@@ -9,7 +9,9 @@
 
 (use-package solarized-theme
   :straight t
-  :init
+  :custom
+  (solarized-distinct-fringe-background t)
+  :config
   (load-theme 'solarized-light t))
 
 

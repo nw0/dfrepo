@@ -9,6 +9,7 @@
 
 ;; relative numbering
 (line-number-mode 1)                ; default, but be sure
+
 (when (>= emacs-major-version 26)
   (setq display-line-numbers-type 'relative)
   (global-display-line-numbers-mode))

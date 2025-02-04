@@ -23,8 +23,8 @@
 ;; (use-package lsp-ui
 ;;   :straight t)
 
-(use-package lsp-ivy
- :straight t)
+; (use-package lsp-ivy
+;  :straight t)
 
 
 (provide 'init-lsp)

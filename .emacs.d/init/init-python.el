@@ -10,13 +10,11 @@
 (use-package python
   :mode ("[./]flake8\\'" . conf-mode)
   :mode ("/Pipfile\\'" . conf-mode)
-  ;; :bind (:map python-mode
-  ;;              ("C-<backspace>" . (lambda (&optional arg)
-  ;;                                   "Call `smart-hungry-delete-backward-char' unless point is directly after the indentation, in which case call `python-indent-dedent-line-backspace'."
-  ;;                                   (interactive)
-  ;;                                   (if (looking-back "^[\t ]+")
-  ;;                                       (python-indent-dedent-line-backspace arg)
-  ;;                                     (smart-hungry-delete-backward-char arg)))))
+  :mode ("\\.py\\'" . python-mode)
+  :bind (:map python-mode-map
+              ([remap backward-delete-char-untabify] . smart-hungry-delete-backward-char)
+	            ([remap delete-backward-char] . smart-hungry-delete-backward-char)
+	            ([remap delete-char] . smart-hungry-delete-forward-char))
   :config
   (setq python-basic-offset 4
         python-indent-offset 4)
@@ -37,10 +35,6 @@
   :hook (python-mode . (lambda ()
                          (require 'lsp-pyright)
                          (lsp-deferred))))
-
-(use-package poetry
-  :straight t
-  :hook (python-mode . poetry-tracking-mode))
 
 (use-package pyimport
   :straight t

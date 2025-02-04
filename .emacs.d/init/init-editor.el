@@ -16,7 +16,7 @@
               tab-stop-list '(4 8 12)
               indent-tabs-mode nil)
 
-(setq require-final-newline t)      ; less insanity
+(setq require-final-newline t)          ; less insanity
 
 (setq delete-old-versions -1            ; delete excess backup versions silently
       version-control t                 ; use version control
@@ -113,13 +113,57 @@ By default the last line."
   :config (smart-hungry-delete-add-default-hooks))
 
 ;;; Completion and insertion
-(use-package company
+(use-package emacs
+  :config
+  ;; Hide M-x commands not in current mode
+  (read-extended-command-predicate #'command-completion-default-include-p)
+  ;; tab-cycle completions
+  (completion-cycle-threshold 5)
+  ;; allow tab-completion
+  (tab-always-indent 'complete))
+
+(use-package vertico
   :straight t
-  :diminish company-mode
-  :hook (after-init . global-company-mode)
   :custom
-  (global-company-mode 1)
-  (company-idle-delay .4))
+  ;; (vertico-scroll-margin 0) ;; Different scroll margin
+  ;; (vertico-count 20) ;; Show more candidates
+  ;; (vertico-resize t) ;; Grow and shrink the Vertico minibuffer
+  ;; (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
+  :init
+  (vertico-mode))
+
+;; Persist history over Emacs restarts. Vertico sorts by history position.
+(use-package savehist
+  :straight t
+  :init
+  (savehist-mode))
+
+(use-package orderless
+  :straight t
+  :custom
+  (completion-styles '(tab orderless basic)
+  (completion-category-overrides '((file (styles basic partial-completion))))))
+
+(use-package corfu
+  :straight t
+  :custom
+  (corfu-auto t)
+  (corfu-quit-no-match 'separator)
+  (corfu-preselect 'directory)
+  :init
+  (global-corfu-mode)
+  :config
+  (add-to-list 'completion-styles-alist
+             '(tab completion-basic-try-completion ignore
+               "Completion style which provides TAB completion only.")))
+
+; (use-package company
+;   :straight t
+;   :diminish company-mode
+;   :hook (after-init . global-company-mode)
+;   :custom
+;   (global-company-mode 1)
+;   (company-idle-delay .4))
 
 
 (provide 'init-editor)

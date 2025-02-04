@@ -13,9 +13,6 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
-(transient-mark-mode 1)
-(delete-selection-mode t)           ; delete selection by DEL or overwriting
-
 (use-package diminish
   :straight t
   :config
