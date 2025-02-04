@@ -92,56 +92,6 @@
 (use-package ledger-mode
   :straight t
   :hook (ledger-mode . (lambda () (mixed-pitch-mode -1))))
-
-(use-package elfeed
-  :straight t
-  :bind ("C-x w" . 'elfeed)
-  :config
-  (add-to-list 'evil-motion-state-modes 'elfeed-search-mode)
-  (add-to-list 'evil-motion-state-modes 'elfeed-show-mode)
-  (evil-define-key* 'motion elfeed-search-mode-map
-                    "gb" #'elfeed-search-browse-url
-                    "gr" #'elfeed-search-update--force
-                    "gR" #'elfeed-search-fetch)
-  (evil-define-key* 'motion elfeed-show-mode-map
-                    "gb" #'elfeed-show-visit
-                    "gj" #'elfeed-show-next
-                    "gk" #'elfeed-show-prev))
-(setq elfeed-show-mode-hook
-      (lambda ()
-        (set-face-attribute 'variable-pitch (selected-frame) :font (font-spec :family "Nimbus Sans" :size 24 :height 300))
-        (setq fill-column 90)
-        (setq line-spacing 0.3)
-        (setq show-trailing-whitespace nil)))
-
-(use-package elfeed-org
-  :straight t
-  :after (elfeed org)
-  :config
-  (with-eval-after-load 'org
-  (elfeed-org)
-  (setq rmh-elfeed-org-files (list "~/org/feeds.org"))
-  (org-reload)))
-
-;; split pane
-(use-package elfeed-goodies
-  :straight t
-  :after (elfeed)
-  :config (elfeed-goodies/setup))
-
-(defun elfeed-mark-all-as-read ()
-  (interactive)
-  (mark-whole-buffer)
-  (elfeed-search-untag-all-unread))
-(define-key elfeed-search-mode-map (kbd "R") 'elfeed-mark-all-as-read)
-
-(use-package explain-pause-mode
-  :straight (explain-pause-mode :type git :host github :repo "lastquestion/explain-pause-mode")
-  :diminish
-  :config
-  (explain-pause-mode))
-
-
 (use-package org
   :bind (:map org-mode-map
               ("C-c a" . org-agenda))

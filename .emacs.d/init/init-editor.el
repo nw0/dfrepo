@@ -45,7 +45,6 @@
                                comint-mode-hook
                                compilation-mode-hook
                                eshell-mode-hook
-                               elfeed-search-mode-hook
                                minibuffer-setup-hook))
   (add-hook no-whitespace-hooks
             (lambda () (setq show-trailing-whitespace nil))))
