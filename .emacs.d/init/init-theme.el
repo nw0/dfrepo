@@ -7,13 +7,10 @@
 
 ;;; Code:
 
-(use-package autothemer
-  :straight t)
-(load-theme 'contrast t)
-
-(use-package smart-mode-line
+(use-package solarized-theme
   :straight t
-  :config (sml/setup))
+  :init
+  (load-theme 'solarized-light t))
 
 
 (provide 'init-theme)
