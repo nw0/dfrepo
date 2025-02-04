@@ -35,3 +35,7 @@
     helper = store
 [pull]
 	rebase = false
+[rerere]
+	enabled = true
+[init]
+	defaultBranch = main
