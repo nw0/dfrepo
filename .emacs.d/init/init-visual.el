@@ -28,7 +28,6 @@
       blink-matching-paren nil)
 
 (use-package highlight-symbol
-  :straight t
   :diminish
   :bind (
          :map highlight-symbol-nav-mode-map
@@ -41,7 +40,6 @@
         hightlight-symbol-on-navigation-p t))
 
 (use-package hl-todo
-  :straight t
   :diminish
   :config
   (setq hl-todo-keyword-faces
@@ -53,14 +51,12 @@
   (global-hl-todo-mode))
 
 (use-package rainbow-mode
-  :straight t
   :diminish
   :config
   (setq rainbow-x-colors nil)
   (add-hook 'prog-mode-hook 'rainbow-mode))
 
 (use-package diff-hl
-  :straight t
   :after magit
   :init
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)

@@ -8,7 +8,6 @@
 ;;; Code:
 
 (use-package lsp-mode
-  :straight t
   :init (setq lsp-keymap-prefix "C-c l"
               lsp-print-performance t)
   :hook ((rust-mode . lsp)
@@ -20,11 +19,9 @@
         lsp-idle-delay 0.8
         lsp-signature-auto-activate nil))
 
-;; (use-package lsp-ui
-;;   :straight t)
+;; (use-package lsp-ui)
 
-; (use-package lsp-ivy
-;  :straight t)
+; (use-package lsp-ivy)
 
 
 (provide 'init-lsp)

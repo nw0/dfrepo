@@ -8,7 +8,6 @@
 ;;; Code:
 
 (use-package solarized-theme
-  :straight t
   :custom
   (solarized-distinct-fringe-background t)
   :config

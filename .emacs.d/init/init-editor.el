@@ -34,7 +34,6 @@
 
 ;; Automatically remove whitespace when saving these files
 (use-package ws-butler
-  :straight t
   :diminish
   :hook ((prog-mode org-mode) . ws-butler-mode))
 
@@ -66,7 +65,6 @@
       scroll-conservatively 10000)
 
 (use-package evil
-  :straight t
   :init
   (setq evil-want-integration t ; the default
         evil-want-keybinding nil
@@ -101,12 +99,10 @@ By default the last line."
 
 (use-package evil-collection
   :after evil
-  :straight t
   :config
   (evil-collection-init))
 
 (use-package smart-hungry-delete
-  :straight t
   :bind (("C-<backspace>" . smart-hungry-delete-backward-char)
          ("C-d" . smart-hungry-delete-forward-char))
   :defer nil ;; dont defer so we can add our functions to hooks
@@ -123,7 +119,6 @@ By default the last line."
   (tab-always-indent 'complete))
 
 (use-package vertico
-  :straight t
   :custom
   ;; (vertico-scroll-margin 0) ;; Different scroll margin
   ;; (vertico-count 20) ;; Show more candidates
@@ -134,18 +129,15 @@ By default the last line."
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
-  :straight t
   :init
   (savehist-mode))
 
 (use-package orderless
-  :straight t
   :custom
   (completion-styles '(tab orderless basic)
   (completion-category-overrides '((file (styles basic partial-completion))))))
 
 (use-package corfu
-  :straight t
   :custom
   (corfu-auto t)
   (corfu-quit-no-match 'separator)
@@ -158,7 +150,6 @@ By default the last line."
                "Completion style which provides TAB completion only.")))
 
 ; (use-package company
-;   :straight t
 ;   :diminish company-mode
 ;   :hook (after-init . global-company-mode)
 ;   :custom

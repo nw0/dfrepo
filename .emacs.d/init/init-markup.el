@@ -7,25 +7,20 @@
 
 ;;; Code:
 
-(use-package adoc-mode
-  :straight t)
+(use-package adoc-mode)
 
-(use-package asciidoc
-  :straight t)
+(use-package asciidoc)
 
 (use-package markdown-mode
-  :straight t
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
-(use-package toml-mode
-  :straight t)
+(use-package toml-mode)
 
 (use-package yaml-mode
-  :straight t
   :hook
   (yaml-mode . (lambda () (mixed-pitch-mode -1))))
 

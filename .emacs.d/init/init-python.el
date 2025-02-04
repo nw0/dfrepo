@@ -31,13 +31,11 @@
   (flycheck-add-next-checker 'python-pylint 'python-mypy t))
 
 (use-package lsp-pyright
-  :straight t
   :hook (python-mode . (lambda ()
                          (require 'lsp-pyright)
                          (lsp-deferred))))
 
 (use-package pyimport
-  :straight t
   :defer t)
 
 (provide 'init-python)

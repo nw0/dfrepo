@@ -14,13 +14,11 @@
 (scroll-bar-mode -1)
 
 (use-package diminish
-  :straight t
   :config
   (diminish 'eldoc-mode)
   (diminish 'visual-line-mode))
 
 (use-package undo-tree
-  :straight t
   :diminish)
 
 ;;; Graphical

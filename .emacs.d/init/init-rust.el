@@ -7,11 +7,8 @@
 
 ;;; Code:
 
-;; Found this to be faster than rust-mode
 (use-package rust-mode
-  :straight t
   :defer t
-;;  :mode "\\.rs\\'"
   :bind (:map rust-mode-map ("M-<return>" . comment-indent-new-line))
   :config
   (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
@@ -19,7 +16,6 @@
 
 ;; Doesn't work, json-read-error
 (use-package flycheck-rust
-  :straight t
   :init
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 

@@ -2,21 +2,17 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package tree-sitter
-  :straight t)
+(use-package tree-sitter)
 
 (use-package tree-sitter-langs
-  :straight t
   :after tree-sitter)
 
 (use-package tree-sitter-indent
-  :straight t
   :after tree-sitter)
 
 ;; Miscellaneous languages not belonging to their own files follow
 
 (use-package irony
-  :straight t
   :hook (c++-mode . irony-mode)
   :hook (c-mode . irony-mode)
   :hook (objc-mode . irony-mode)

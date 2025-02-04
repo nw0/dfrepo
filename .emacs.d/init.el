@@ -65,13 +65,11 @@
                     :width 'normal)
 
 (use-package pangu-spacing
-  :straight t
   :diminish
   :config
   (global-pangu-spacing-mode 1))
 
 (use-package ledger-mode
-  :straight t
   :hook (ledger-mode . (lambda () (mixed-pitch-mode -1))))
 
 (use-package explain-pause-mode

@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
+(setq straight-use-package-by-default t)
+
 ;;; Bootstrap straight and use-package
 (defvar bootstrap-version)
 (let ((bootstrap-file

@@ -8,20 +8,17 @@
 ;;; Code:
 
 (use-package projectile
-  :straight t
   :diminish
   :config
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "M-p") 'projectile-command-map))
 
 (use-package counsel-projectile
-  :straight t
   :after (projectile ivy counsel)
   :config
   (counsel-projectile-mode))
 
 (use-package magit
-  :straight t
   :after evil
   :bind ("C-x g" . magit-status)
   :config
@@ -31,11 +28,9 @@
   (evil-set-initial-state 'magit-log-mode 'emacs)
   (evil-set-initial-state 'magit-popup-mode 'emacs))
 
-(use-package flycheck
-  :straight t)
+(use-package flycheck)
 
 (use-package flyspell
-  :straight t
   :diminish
   :hook ((text-mode . flyspell-mode)
          (prog-mode . flyspell-prog-mode))

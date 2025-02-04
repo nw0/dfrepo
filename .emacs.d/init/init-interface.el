@@ -10,7 +10,6 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (use-package which-key
-  :straight t
   :diminish which-key-mode
   :init (which-key-mode)
   :config
@@ -22,7 +21,6 @@
   (ivy--regex-fuzzy (concat "^" str)))
 
 (use-package ivy
-  :straight t
   :diminish
   :bind (("C-x C-f" . counsel-find-file)
          ("C-c k" . counsel-rg)
@@ -50,12 +48,10 @@
                                 (t . ivy--regex-plus))))
 
 (use-package ivy-prescient
-  :straight t
   :after ivy
   :init (ivy-prescient-mode))
 
 (use-package ivy-rich
-  :straight t
   :after (ivy counsel)
   :config
   (setq ivy-rich-path-style 'abbrev)
@@ -63,21 +59,18 @@
   (ivy-rich-mode 1))
 
 (use-package counsel
-  :straight t
   :after ivy
   :diminish
   :config
   (counsel-mode))
 
 (use-package swiper
-  :straight t
   :after ivy
   :bind (("C-s" . swiper)
          ("C-r" . swiper)))
 
 ;; how to use multiple windows
 (use-package ace-window
-  :straight t
   :config
   (global-set-key (kbd "C-x o") 'ace-window)
   (setq aw-scope 'frame
