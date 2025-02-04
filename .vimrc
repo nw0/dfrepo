@@ -1,3 +1,4 @@
+set nocompatible
 filetype off
 syntax on
 " To load plugins correctly
@@ -44,3 +45,7 @@ set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 " Settings for specific file types
 autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab autoindent
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType typescript setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType typescriptreact setlocal ts=2 sts=2 sw=2 expandtab
+
+"autocmd BufNewFile,BufRead *.tsx setlocal filetype=typescript
