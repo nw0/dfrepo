@@ -19,9 +19,9 @@
         lsp-idle-delay 0.8
         lsp-signature-auto-activate nil))
 
-;; (use-package lsp-ui)
+(use-package lsp-ui)
 
-; (use-package lsp-ivy)
+(use-package lsp-ivy)
 
 
 (provide 'init-lsp)

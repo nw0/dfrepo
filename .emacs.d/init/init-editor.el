@@ -105,6 +105,7 @@ By default the last line."
 
 (use-package evil-collection
   :after evil
+  :diminish evil-collection-unimpaired-mode
   :config
   (evil-collection-init))
 
@@ -154,6 +155,12 @@ By default the last line."
   (add-to-list 'completion-styles-alist
              '(tab completion-basic-try-completion ignore
                "Completion style which provides TAB completion only.")))
+
+(global-set-key (kbd "C-'") 'avy-goto-char-2)
+(global-set-key (kbd "M-g e") 'avy-goto-word-0)
+(global-set-key (kbd "M-g w") 'avy-goto-word-1)
+
+(global-set-key (kbd "C-S-v") 'clipboard-yank)
 
 ; (use-package company
 ;   :diminish company-mode

@@ -2,15 +2,16 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package tree-sitter)
-
-(use-package tree-sitter-langs
-  :after tree-sitter)
-
-(use-package tree-sitter-indent
-  :after tree-sitter)
+;; Assume Emacs 29 - with built-in treesit
+(use-package treesit-auto
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'nil)
+  (global-treesit-auto-mode))
 
 ;; Miscellaneous languages not belonging to their own files follow
+
 
 (use-package irony
   :hook (c++-mode . irony-mode)

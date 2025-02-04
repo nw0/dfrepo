@@ -78,6 +78,9 @@
   (setq aw-scope 'frame
         aw-keys '(?d ?h ?t ?n ?s ?i ?u ?e ?o ?a)))
 
+(use-package smart-mode-line
+  :config (sml/setup))
+
 
 (provide 'init-interface)
 ;;; init-interface.el ends here
