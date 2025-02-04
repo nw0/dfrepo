@@ -9,6 +9,8 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+(setopt display-time-default-load-average nil)
+
 (use-package which-key
   :diminish which-key-mode
   :init (which-key-mode)

@@ -26,6 +26,12 @@
       vc-follow-symlinks t              ; don't confirm opening symlinked file
       auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 
+;; for the scratch buffer
+(setopt initial-major-mode 'fundamental-mode)
+
+(setopt auto-revert-avoid-polling t)
+(setopt auto-revert-interval 5)
+(setopt auto-revert-check-vc-info t)
 (global-auto-revert-mode 1)
 
 ;; templates for new files
