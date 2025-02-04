@@ -3,7 +3,7 @@
 # my working directories
 /backup/
 /BrowserHomes/
-/cheri/
+/Downloads
 /Mail/
 /Music
 /org/
@@ -17,17 +17,23 @@
 /.aspell.*
 /.cache/
 /.cargo/
+/.config/.gsd-keyboard.settings-ported
 /.config/ario/
 /.config/Thunar/
 /.config/borg/security/
 /.config/cef_user_data/
+/.config/chromium/
 /.config/dconf/
 /.config/dleyna-renderer-service.conf
+/.config/enchant/
+/.config/eog/accels
 /.config/evince/
 /.config/evolution/
+/.config/freerdp/
 /.config/gedit/
 /.config/gtk-3.0/bookmarks
 /.config/htop/
+/.config/ibus/
 /.config/jgit/
 /.config/Keybase
 /.config/keybase
@@ -35,6 +41,7 @@
 /.config/mimeapps.list
 /.config/mpd/
 /.config/pulse/
+/.config/remmina/
 /.config/sqlitebrowser
 /.config/systemd/user/*.target.wants/
 /.config/unity3d/
@@ -56,6 +63,7 @@
 /.gsutil/
 /.g8/
 /go/
+/.hplip/
 /.ipython/
 /.ivy2/
 /.jack-settings
@@ -69,6 +77,8 @@
 /.mailcheckrc
 /.mozilla/firefox/
 /.ncmpcpp/
+/.npm/
+/.nvm/
 /.password-store/
 /.pgpass
 /.pki/
