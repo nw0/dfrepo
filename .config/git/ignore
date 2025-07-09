@@ -37,3 +37,6 @@ flycheck_*.el
 
 ## directory configuration
 .dir-locals.el
+
+# MacOS
+.DS_STORE
