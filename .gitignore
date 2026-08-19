@@ -1,15 +1,20 @@
 # ignore file for dotfiles repo
 
 # my working directories
+/Applications/
 /backup/
 /BrowserHomes/
-/Desktop
-/Documents
-/Downloads
+/Desktop/
+/Documents/
+/Downloads/
+/Library/
 /Mail/
+/Movies/
 /Music
 /org/
 /personal/
+/Pictures/
+/Public/
 /repos/
 /scratch/
 /work/
@@ -19,6 +24,7 @@
 /.aspell.*
 /.cache/
 /.cargo/
+/.CFUserTextEncoding
 /.config/.gsd-keyboard.settings-ported
 /.config/ario/
 /.config/Thunar/
